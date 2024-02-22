@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode/home/homePage.dart';
+import 'package:qrcode/loadingApp/loadingApp.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: HomePage(),
+    home: LoginAppPage(),
     debugShowCheckedModeBanner: false,
   ));
 }
