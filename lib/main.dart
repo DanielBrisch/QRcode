@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode/homePage.dart';
+import 'package:qrcode/home/homePage.dart';
 
 void main() {
   runApp(const MaterialApp(
