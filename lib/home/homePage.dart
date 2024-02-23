@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qrcode/create/createPage.dart';
 import 'package:qrcode/home/buttonContainer.dart';
@@ -14,6 +15,11 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+    
     return Scaffold(
       body: SingleChildScrollView(
           child: Container(
