@@ -31,9 +31,8 @@ class _CreatePage extends State<CreatePage> {
           },
         ),
         ),
-      body: SizedBox(
-        width: size.width,
-        height: size.height,
+      body: SingleChildScrollView(
+        child: SizedBox(
         child: Stack(
         children: [
           Column(
@@ -52,11 +51,14 @@ class _CreatePage extends State<CreatePage> {
             top: size.height * 0.03, 
             left: size.width * 0.1,
             right: size.width * 0.1,
-            child: const ContainerCreateQRcode(),
+            child: ContainerCreateQRcode(),
           ),
             ]
           ),
       ),
-      );
+      )
+      ); 
+      
+      
   }
 }
