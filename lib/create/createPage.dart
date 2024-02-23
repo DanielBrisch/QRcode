@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:qrcode/create/ContainerCreateQRcode.dart';
 
 class CreatePage extends StatefulWidget {
   const CreatePage({super.key});
@@ -33,17 +34,29 @@ class _CreatePage extends State<CreatePage> {
       body: SizedBox(
         width: size.width,
         height: size.height,
-        child: Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height / 2.3, 
-          color: Colors.deepPurple,
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height / 2.3, 
-          color: Colors.white,
-        ),
-      ],
-    )));
+        child: Stack(
+        children: [
+          Column(
+            children: [
+              Container(
+                height: size.height / 2.3,
+                color: Colors.deepPurple,
+              ),
+              Container(
+                height: size.height / 2.3,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          Positioned(
+            top: size.height * 0.03, 
+            left: size.width * 0.1,
+            right: size.width * 0.1,
+            child: const ContainerCreateQRcode(),
+          ),
+            ]
+          ),
+      ),
+      );
   }
 }
