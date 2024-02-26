@@ -19,7 +19,7 @@ class _HomePage extends State<HomePage> {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-    
+
     return Scaffold(
       body: SingleChildScrollView(
           child: Container(
@@ -67,7 +67,6 @@ class _HomePage extends State<HomePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 52),
                   Container(
                     height: 40,
                     width: 100,
