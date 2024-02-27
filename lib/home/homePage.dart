@@ -79,11 +79,11 @@ class _HomePage extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.info),
+                            icon: const Icon(Icons.info_outline),
                             onPressed: () {},
                           ),
                           IconButton(
-                            icon: const Icon(Icons.settings),
+                            icon: const Icon(Icons.settings_outlined),
                             onPressed: () {},
                           ),
                         ]),

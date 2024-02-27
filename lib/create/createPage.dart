@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:qrcode/appBar/mainAppBar.dart';
 import 'package:qrcode/create/ContainerCreateQRcode.dart';
 
 class CreatePage extends StatefulWidget {
@@ -32,6 +36,21 @@ class _CreatePage extends State<CreatePage> {
             Navigator.of(context).pop();
           },
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.white,),
+            onPressed: () {
+              
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings_outlined, color: Colors.white),
+            onPressed: () {
+
+            },
+          ),
+          const SizedBox(width: 30)
+        ],
       ),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -62,24 +81,18 @@ class _CreatePage extends State<CreatePage> {
                       SizedBox(height: 20),
                       Text('To create a QR code, you need to scan'),
                       Text('or add barcodes from already scanned'),
+                      Padding(padding: EdgeInsets.only(top: 100),
+                      child: MainAppBar(),)
                     ],
                   ),
                 ),
+                // const Positioned(
+                //   top: 100, 
+                //     child: MainAppBar(),
+                //   )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add_circle_outline,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ],
+        ],
         ),
       ),
     );

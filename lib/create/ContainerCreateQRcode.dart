@@ -23,6 +23,8 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
 
   String qrText = '';
 
+  Color color = Colors.redAccent.shade200;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +51,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.redAccent.shade200,
+                  color: color,
                   width: 5.0,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -95,7 +97,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.redAccent.shade200;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -110,7 +114,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.orange;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -125,7 +131,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.yellow;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -140,7 +148,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.green;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -155,7 +165,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.lightGreenAccent;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -170,7 +182,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                           height: 30,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Adicione sua função de callback aqui
+                              setState(() {
+                                color = Colors.deepPurpleAccent;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -187,28 +201,27 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Lógica para o botão "Cancel"
+                    Navigator.of(context).pop(); 
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.red, fontSize: 20
-                          // Não incluir o sublinhado
                           ),
                     ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Lógica para o botão "Save"
+
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Save',
                       style: TextStyle(color: Colors.green, fontSize: 20
-                          // Não incluir o sublinhado
+
                           ),
                     ),
                   ),
