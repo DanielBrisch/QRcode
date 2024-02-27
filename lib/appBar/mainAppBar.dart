@@ -15,34 +15,66 @@ class _MainAppBar extends State<MainAppBar> {
         color: Colors.grey,
         borderRadius: BorderRadius.all(Radius.circular(17))
       ),
-      width: 310,
-      height: 80,
+      width: MediaQuery.of(context).size.width * 0.80,
+      height: MediaQuery.of(context).size.height * 0.089,
       child:  Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ElevatedButton(
+        SizedBox(
+          height: 57,
+          width: MediaQuery.of(context).size.width * 0.25,
+          child: ElevatedButton(
           onPressed: () {
-            // Adicione aqui a lógica para a ação do botão
+            
           },
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.transparent), 
+              elevation: MaterialStateProperty.all(0), 
+              shape: MaterialStateProperty.all(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)), // Borda sem curvatura
+                ),
+              ),
+              side: MaterialStateProperty.all(BorderSide.none), // Sem borda
             ),
-          ),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add_circle_outline, size: 32.0, color: Colors.black),
+              Icon(Icons.add_circle_outline, size: 26.0, color: Colors.black),
               SizedBox(height: 8.0),
-              Text('Adicionar', style: TextStyle(fontSize: 16.0)),
+              Text('Create', style: TextStyle(fontSize: 16.0)),
             ],
           ),
         ),
-        IconButton(onPressed: () {
-          
-        }, 
-        icon: const Icon(Icons.add_circle_outline, color: Colors.black,))
+        ),
+        SizedBox(
+          height: 57,
+          width: 96,
+          child: ElevatedButton(
+          onPressed: () {
+            
+          },
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.transparent), 
+              elevation: MaterialStateProperty.all(0), 
+              shape: MaterialStateProperty.all(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)), // Borda sem curvatura
+                ),
+              ),
+              side: MaterialStateProperty.all(BorderSide.none), // Sem borda
+            ),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.add_circle_outline, size: 26.0, color: Colors.black),
+              SizedBox(height: 8.0),
+              Text('Create', style: TextStyle(fontSize: 16.0)),
+            ],
+          ),
+        ),
+        ),
       ],
       )
     );

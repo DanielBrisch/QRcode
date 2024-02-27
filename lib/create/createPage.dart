@@ -75,14 +75,14 @@ class _CreatePage extends State<CreatePage> {
                   top: size.height * 0.05,
                   left: size.width * 0.1,
                   right: size.width * 0.1,
-                  child: const Column(
+                  child: Column(
                     children: [
-                      ContainerCreateQRcode(),
-                      SizedBox(height: 20),
-                      Text('To create a QR code, you need to scan'),
-                      Text('or add barcodes from already scanned'),
-                      Padding(padding: EdgeInsets.only(top: 100),
-                      child: MainAppBar(),)
+                      const ContainerCreateQRcode(),
+                      const SizedBox(height: 20),
+                      const Text('To create a QR code, you need to scan'),
+                      const Text('or add barcodes from already scanned'),
+                      Padding(padding: EdgeInsets.only(top: size.width * 0.3),
+                      child: MainAppBar())
                     ],
                   ),
                 ),
