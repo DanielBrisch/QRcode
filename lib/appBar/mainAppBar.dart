@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qrcode/create/createPage.dart';
+import 'package:qrcode/scan/scanPage.dart';
+import 'package:qrcode/service/qrCodeService.dart';
 
 class MainAppBar extends StatefulWidget {
   const MainAppBar({super.key});
@@ -8,50 +11,125 @@ class MainAppBar extends StatefulWidget {
 }
 
 class _MainAppBar extends State<MainAppBar> {
+
   @override
   Widget build(BuildContext context) {
+  
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.grey,
+        color: Color.fromRGBO(240,240,240, 1),
         borderRadius: BorderRadius.all(Radius.circular(17))
       ),
       width: MediaQuery.of(context).size.width * 0.80,
       height: MediaQuery.of(context).size.height * 0.089,
-      child:  Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          child: GestureDetector(
-            child: Center(
-              child: Column(
-                children: [
-                    Icon(Icons.qr_code_scanner_outlined),
-                    Text('scan')
-                ],
-            ),
-            ),
-            onTap: () {
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                child: GestureDetector(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Icon(Icons.add_circle_outline, color: colorButton(0)),
+                          Text('create', style: TextStyle(color: colorButton(0)))
+                      ],
+                  ),
+                  ),
+                  onTap: () {
+                    setState(() {
+                        QRService.pageSelected = 0;
+                    });
+                    if (QRService.pageSelected! > 0) {
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CreatePage()),
+                          );
+                    }
+                    
+                  },
+                ),
+              ),
+              SizedBox(
+                child: GestureDetector(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Icon(Icons.qr_code_scanner_outlined, color: colorButton(1)),
+                          Text('scan',style: TextStyle(color: colorButton(1)))
+                      ],
+                  ),
+                  ),
+                  onTap: () {
+                    setState(() {
+                        QRService.pageSelected = 1;
+                    });
+                    if (QRService.pageSelected! > 1) {
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ScanPage()),
+                              );
+                    }
+                  },
+                ),
+              ),
+              SizedBox(
+                child: GestureDetector(
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Icon(Icons.history),
+                          Text('history')
+                      ],
+                  ),
+                  ),
+                  onTap: () {
 
-            },
-          ),
-        ),
-        SizedBox(
-          child: GestureDetector(
-            child: Center(
-              child: Column(
-                children: [
-                    Icon(Icons.qr_code_scanner_outlined),
-                    Text('scan')
-                ],
-            ),
-            ),
-            onTap: () {
+                  },
+                ),
+              ),
+              SizedBox(
+                child: GestureDetector(
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Icon(Icons.print_outlined),
+                          Text('print')
+                      ],
+                  ),
+                  ),
+                  onTap: () {
 
-            },
-          ),
-        )
-      ],
-      )
+                  },
+                ),
+              ),
+              SizedBox(
+                child: GestureDetector(
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Icon(Icons.mail_outlined),
+                          Text('send')
+                      ],
+                  ),
+                  ),
+                  onTap: () {
+
+                  },
+                ),
+              ),
+            ],
+      ),
     );
+  }
+
+  Color colorButton(number) {
+    return QRService.pageSelected == number ? Colors.purple : Colors.black;
   }
   }

@@ -81,8 +81,8 @@ class _CreatePage extends State<CreatePage> {
                       const SizedBox(height: 20),
                       const Text('To create a QR code, you need to scan'),
                       const Text('or add barcodes from already scanned'),
-                      Padding(padding: EdgeInsets.only(top: size.width * 0.3),
-                      child: MainAppBar())
+                      Padding(padding: EdgeInsets.only(top: size.width * 0.2),
+                      child: const MainAppBar())
                     ],
                   ),
                 ),

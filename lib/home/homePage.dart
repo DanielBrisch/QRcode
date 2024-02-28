@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qrcode/create/createPage.dart';
 import 'package:qrcode/home/buttonContainer.dart';
+import 'package:qrcode/service/qrCodeService.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -118,6 +119,9 @@ class _HomePage extends State<HomePage> {
                         MaterialPageRoute(
                             builder: (context) => const CreatePage()),
                       );
+                      setState(() {
+                        QRService.pageSelected = 0;
+                      });
                     },
                     colorCircle: Colors.deepPurple,
                     icon: const Icon(
