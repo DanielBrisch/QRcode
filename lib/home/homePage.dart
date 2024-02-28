@@ -68,6 +68,7 @@ class _HomePage extends State<HomePage> {
                       ),
                     ],
                   ),
+                  const Spacer(),
                   Container(
                     height: 40,
                     width: 100,

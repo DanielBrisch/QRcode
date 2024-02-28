@@ -39,15 +39,14 @@ class _MainAppBar extends State<MainAppBar> {
                   onTap: () {
                     setState(() {
                         QRService.pageSelected = 0;
-                    });
-                    if (QRService.pageSelected! > 0) {
+                      });
+                    if (QRService.pageSelected! == 0) {
                       Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const CreatePage()),
                           );
                     }
-                    
                   },
                 ),
               ),
@@ -64,14 +63,13 @@ class _MainAppBar extends State<MainAppBar> {
                   ),
                   onTap: () {
                     setState(() {
-                        QRService.pageSelected = 1;
-                    });
-                    if (QRService.pageSelected! > 1) {
+                          QRService.pageSelected = 1;
+                      });
+                    if (QRService.pageSelected! == 1) {
                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ScanPage()),
-                              );
+                        context,
+                        MaterialPageRoute(builder: (context) => const ScanPage()),
+                      );
                     }
                   },
                 ),

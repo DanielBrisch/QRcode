@@ -199,28 +199,46 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.transparent), 
+                    elevation: MaterialStateProperty.all(0), 
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)), 
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
                     Navigator.of(context).pop(); 
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.red, fontSize: 20
+                      style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold
                           ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.transparent), 
+                    elevation: MaterialStateProperty.all(0), 
+                    shape: MaterialStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)), 
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
 
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Save',
-                      style: TextStyle(color: Colors.green, fontSize: 20
+                      style: TextStyle(color: Colors.green, fontSize: 20, fontWeight: FontWeight.bold
 
                           ),
                     ),

@@ -81,15 +81,11 @@ class _CreatePage extends State<CreatePage> {
                       const SizedBox(height: 20),
                       const Text('To create a QR code, you need to scan'),
                       const Text('or add barcodes from already scanned'),
-                      Padding(padding: EdgeInsets.only(top: size.width * 0.2),
+                      Padding(padding: EdgeInsets.only(top: size.width * 0.350),
                       child: const MainAppBar())
                     ],
                   ),
                 ),
-                // const Positioned(
-                //   top: 100, 
-                //     child: MainAppBar(),
-                //   )
               ],
             ),
         ],
@@ -97,4 +93,10 @@ class _CreatePage extends State<CreatePage> {
       ),
     );
   }
+
+  // @override
+  // void dispose() {
+  //   controller?.dispose();
+  //   super.dispose();
+  // }
 }
