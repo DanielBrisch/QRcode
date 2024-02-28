@@ -19,62 +19,37 @@ class _MainAppBar extends State<MainAppBar> {
       height: MediaQuery.of(context).size.height * 0.089,
       child:  Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          height: 57,
-          width: MediaQuery.of(context).size.width * 0.25,
-          child: ElevatedButton(
-          onPressed: () {
-            
-          },
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.transparent), 
-              elevation: MaterialStateProperty.all(0), 
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)), // Borda sem curvatura
-                ),
-              ),
-              side: MaterialStateProperty.all(BorderSide.none), // Sem borda
+          child: GestureDetector(
+            child: Center(
+              child: Column(
+                children: [
+                    Icon(Icons.qr_code_scanner_outlined),
+                    Text('scan')
+                ],
             ),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.add_circle_outline, size: 26.0, color: Colors.black),
-              SizedBox(height: 8.0),
-              Text('Create', style: TextStyle(fontSize: 16.0)),
-            ],
+            ),
+            onTap: () {
+
+            },
           ),
-        ),
         ),
         SizedBox(
-          height: 57,
-          width: 96,
-          child: ElevatedButton(
-          onPressed: () {
-            
-          },
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.transparent), 
-              elevation: MaterialStateProperty.all(0), 
-              shape: MaterialStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)), // Borda sem curvatura
-                ),
-              ),
-              side: MaterialStateProperty.all(BorderSide.none), // Sem borda
+          child: GestureDetector(
+            child: Center(
+              child: Column(
+                children: [
+                    Icon(Icons.qr_code_scanner_outlined),
+                    Text('scan')
+                ],
             ),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.add_circle_outline, size: 26.0, color: Colors.black),
-              SizedBox(height: 8.0),
-              Text('Create', style: TextStyle(fontSize: 16.0)),
-            ],
+            ),
+            onTap: () {
+
+            },
           ),
-        ),
-        ),
+        )
       ],
       )
     );
