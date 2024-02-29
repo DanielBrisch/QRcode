@@ -38,16 +38,15 @@ class _CreatePage extends State<CreatePage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.info_outline, color: Colors.white,),
-            onPressed: () {
-              
-            },
+            icon: const Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            ),
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.settings_outlined, color: Colors.white),
-            onPressed: () {
-
-            },
+            onPressed: () {},
           ),
           const SizedBox(width: 30)
         ],
@@ -81,14 +80,15 @@ class _CreatePage extends State<CreatePage> {
                       const SizedBox(height: 20),
                       const Text('To create a QR code, you need to scan'),
                       const Text('or add barcodes from already scanned'),
-                      Padding(padding: EdgeInsets.only(top: size.width * 0.350),
-                      child: const MainAppBar())
+                      Padding(
+                          padding: EdgeInsets.only(top: size.width * 0.300),
+                          child: const MainAppBar())
                     ],
                   ),
                 ),
               ],
             ),
-        ],
+          ],
         ),
       ),
     );

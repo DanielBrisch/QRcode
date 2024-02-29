@@ -201,46 +201,49 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent), 
-                    elevation: MaterialStateProperty.all(0), 
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    elevation: MaterialStateProperty.all(0),
                     shape: MaterialStateProperty.all(
                       const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)), 
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pop(); 
+                    Navigator.of(context).pop();
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold
-                          ),
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent), 
-                    elevation: MaterialStateProperty.all(0), 
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    elevation: MaterialStateProperty.all(0),
                     shape: MaterialStateProperty.all(
                       const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)), 
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                     ),
                   ),
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Save',
-                      style: TextStyle(color: Colors.green, fontSize: 20, fontWeight: FontWeight.bold
-
-                          ),
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

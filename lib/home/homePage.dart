@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qrcode/create/createPage.dart';
 import 'package:qrcode/home/buttonContainer.dart';
+import 'package:qrcode/scan/scanPage.dart';
 import 'package:qrcode/service/qrCodeService.dart';
 
 class HomePage extends StatefulWidget {
@@ -141,7 +142,13 @@ class _HomePage extends State<HomePage> {
                   ),
                   const Spacer(),
                   ContainerButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ScanPage()),
+                      );
+                    },
                     icon: const Icon(Icons.qr_code_scanner_outlined,
                         color: Colors.white, size: 35),
                     colorCircle: Colors.redAccent,
