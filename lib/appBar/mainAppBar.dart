@@ -35,9 +35,9 @@ class _MainAppBar extends State<MainAppBar> {
                 ),
                 onTap: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CreatePage()),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CreatePage()));
                   setState(() {
                     QRService.pageSelected = 0;
                     QRService.colorForSelected = Colors.purpleAccent;
@@ -56,10 +56,8 @@ class _MainAppBar extends State<MainAppBar> {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ScanPage()),
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ScanPage()));
                 setState(() {
                   QRService.pageSelected = 1;
                   QRService.colorForSelected = Colors.purpleAccent;
