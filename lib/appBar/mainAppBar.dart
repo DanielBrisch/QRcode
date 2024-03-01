@@ -34,10 +34,9 @@ class _MainAppBar extends State<MainAppBar> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CreatePage()));
+                  if (ModalRoute.of(context)!.settings.name != '/create') {
+                    Navigator.pushNamed(context, '/create');
+                  }
                   setState(() {
                     QRService.pageSelected = 0;
                     QRService.colorForSelected = Colors.purpleAccent;
@@ -56,8 +55,9 @@ class _MainAppBar extends State<MainAppBar> {
                 ),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScanPage()));
+                if (ModalRoute.of(context)!.settings.name != '/scan') {
+                  Navigator.pushNamed(context, '/scan');
+                }
                 setState(() {
                   QRService.pageSelected = 1;
                   QRService.colorForSelected = Colors.purpleAccent;
