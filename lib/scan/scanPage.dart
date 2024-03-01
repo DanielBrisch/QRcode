@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qrcode/appBar/mainAppBar.dart';
 
@@ -18,6 +16,8 @@ class _ScanPage extends State<ScanPage> {
   QRViewController? controller;
 
   double _zoomValue = 0.5;
+
+  bool boolShowDialog = false;
 
   @override
   Widget build(BuildContext context) {
@@ -209,13 +209,36 @@ class _ScanPage extends State<ScanPage> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
+  void _onQRViewCreated(QRViewController controller) async {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
       });
     });
+  }
+
+  Future<void> exibeDialog() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(
+              child: Icon(Icons.check_circle, color: Colors.green)),
+          content: const Center(
+            child: Text('Successful scanning'),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
