@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode/create/createPage.dart';
-import 'package:qrcode/scan/scanPage.dart';
 import 'package:qrcode/service/qrCodeService.dart';
 
 class MainAppBar extends StatefulWidget {
@@ -23,45 +21,51 @@ class _MainAppBar extends State<MainAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            child: GestureDetector(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add_circle_outline, color: colorButton(0)),
-                      Text('create', style: TextStyle(color: colorButton(0)))
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  if (ModalRoute.of(context)!.settings.name != '/create') {
-                    Navigator.pushNamed(context, '/create');
-                  }
-                  setState(() {
-                    QRService.pageSelected = 0;
-                    QRService.colorForSelected = Colors.purpleAccent;
-                  });
-                }),
-          ),
+              child: GestureDetector(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_circle_outline,
+                      color: QRService.setColor(QRService.createSelected)),
+                  Text('create',
+                      style: TextStyle(
+                          color: QRService.setColor(QRService.createSelected)))
+                ],
+              ),
+            ),
+            onTap: () {
+              if (ModalRoute.of(context)!.settings.name != '/create') {
+                Navigator.pushNamed(context, '/create');
+                setState(() {
+                  QRService.allFalse();
+                  QRService.createSelected = true;
+                });
+              }
+            },
+          )),
           SizedBox(
             child: GestureDetector(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.qr_code_scanner_outlined, color: colorButton(1)),
-                    Text('scan', style: TextStyle(color: colorButton(1)))
+                    Icon(Icons.qr_code_scanner_outlined,
+                        color: QRService.setColor(QRService.scanSelected)),
+                    Text('scan',
+                        style: TextStyle(
+                            color: QRService.setColor(QRService.scanSelected)))
                   ],
                 ),
               ),
               onTap: () {
                 if (ModalRoute.of(context)!.settings.name != '/scan') {
                   Navigator.pushNamed(context, '/scan');
+                  setState(() {
+                    QRService.allFalse();
+                    QRService.scanSelected = true;
+                  });
                 }
-                setState(() {
-                  QRService.pageSelected = 1;
-                  QRService.colorForSelected = Colors.purpleAccent;
-                });
               },
             ),
           ),
@@ -73,7 +77,16 @@ class _MainAppBar extends State<MainAppBar> {
                   children: [Icon(Icons.history), Text('history')],
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/history');
+                if (ModalRoute.of(context)!.settings.name != '/history') {
+                  Navigator.pushNamed(context, '/history');
+                  setState(() {
+                    QRService.allFalse();
+                    QRService.historySelected = true;
+                  });
+                }
+              },
             ),
           ),
           SizedBox(
@@ -95,15 +108,19 @@ class _MainAppBar extends State<MainAppBar> {
                   children: [Icon(Icons.mail_outlined), Text('send')],
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                if (ModalRoute.of(context)!.settings.name != '/send') {
+                  Navigator.pushNamed(context, '/send');
+                  setState(() {
+                    QRService.allFalse();
+                    QRService.sendSelected = true;
+                  });
+                }
+              },
             ),
           ),
         ],
       ),
     );
-  }
-
-  Color colorButton(number) {
-    return QRService.pageSelected == number ? Colors.purple : Colors.black;
   }
 }

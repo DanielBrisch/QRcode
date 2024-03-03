@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qrcode/appBar/mainAppBar.dart';
 import 'package:qrcode/create/ContainerCreateQRcode.dart';
+import 'package:qrcode/home/homePage.dart';
+import 'package:qrcode/service/qrCodeService.dart';
 
 class CreatePage extends StatefulWidget {
   const CreatePage({super.key});
@@ -33,7 +35,10 @@ class _CreatePage extends State<CreatePage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pushNamed(context, '/home');
+            setState(() {
+              QRService.allFalse();
+            });
           },
         ),
         actions: <Widget>[
@@ -81,7 +86,7 @@ class _CreatePage extends State<CreatePage> {
                       const Text('To create a QR code, you need to scan'),
                       const Text('or add barcodes from already scanned'),
                       Padding(
-                          padding: EdgeInsets.only(top: size.width * 0.300),
+                          padding: EdgeInsets.only(top: size.width * 0.400),
                           child: const MainAppBar())
                     ],
                   ),

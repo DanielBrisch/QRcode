@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode/create/createPage.dart';
+import 'package:qrcode/history/historyPage.dart';
+import 'package:qrcode/home/homePage.dart';
 import 'package:qrcode/loadingApp/loadingApp.dart';
 import 'package:qrcode/scan/scanPage.dart';
+import 'package:qrcode/send/sendPage.dart';
 
 void main() {
   runApp(MaterialApp(
     routes: {
+      '/home': (context) => const HomePage(),
+      '/history': (context) => const HistoryPage(),
       '/create': (context) => const CreatePage(),
       '/scan': (context) => const ScanPage(),
-      // adicione outras rotas conforme necessário
+      '/send': (context) => const SendPage(),
     },
     home: const LoginAppPage(),
     debugShowCheckedModeBanner: false,

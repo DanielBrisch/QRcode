@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qrcode/appBar/mainAppBar.dart';
+import 'package:qrcode/service/qrCodeService.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -21,16 +22,13 @@ class _ScanPage extends State<ScanPage> {
 
   @override
   Widget build(BuildContext context) {
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 300.0
-        : 500.0;
+    Size size = MediaQuery.of(context).size;
+    var scanAreaHeigth = MediaQuery.of(context).size.height * 0.4;
+    var scanAreaWidth = MediaQuery.of(context).size.width * 0.8;
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-
-    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -40,11 +38,11 @@ class _ScanPage extends State<ScanPage> {
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
             overlay: QrScannerOverlayShape(
-              borderColor: Colors.white,
-              borderLength: 80,
-              borderWidth: 5,
-              cutOutSize: scanArea,
-            ),
+                borderColor: Colors.white,
+                borderLength: 80,
+                borderWidth: 5,
+                cutOutHeight: scanAreaHeigth,
+                cutOutWidth: scanAreaWidth),
           ),
         ),
         Padding(
@@ -57,7 +55,10 @@ class _ScanPage extends State<ScanPage> {
                 icon:
                     const Icon(Icons.arrow_back, color: Colors.white, size: 25),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pushNamed(context, '/home');
+                  setState(() {
+                    QRService.allFalse();
+                  });
                 },
               ),
               const SizedBox(width: 20),
@@ -161,7 +162,7 @@ class _ScanPage extends State<ScanPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
+                  padding: const EdgeInsets.only(bottom: 50),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,

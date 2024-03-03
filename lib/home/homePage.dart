@@ -116,14 +116,13 @@ class _HomePage extends State<HomePage> {
                 children: [
                   ContainerButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreatePage()),
-                      );
-                      setState(() {
-                        QRService.pageSelected = 0;
-                      });
+                      if (ModalRoute.of(context)!.settings.name != '/create') {
+                        Navigator.pushNamed(context, '/create');
+                        setState(() {
+                          QRService.allFalse();
+                          QRService.createSelected = true;
+                        });
+                      }
                     },
                     colorCircle: Colors.deepPurple,
                     icon: const Icon(
@@ -143,11 +142,13 @@ class _HomePage extends State<HomePage> {
                   const Spacer(),
                   ContainerButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ScanPage()),
-                      );
+                      if (ModalRoute.of(context)!.settings.name != '/scan') {
+                        Navigator.pushNamed(context, '/scan');
+                        setState(() {
+                          QRService.allFalse();
+                          QRService.scanSelected = true;
+                        });
+                      }
                     },
                     icon: const Icon(Icons.qr_code_scanner_outlined,
                         color: Colors.white, size: 35),
@@ -169,7 +170,15 @@ class _HomePage extends State<HomePage> {
               child: Row(
                 children: [
                   ContainerButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (ModalRoute.of(context)!.settings.name != '/send') {
+                        Navigator.pushNamed(context, '/send');
+                        setState(() {
+                          QRService.allFalse();
+                          QRService.sendSelected = true;
+                        });
+                      }
+                    },
                     icon: const Icon(Icons.mail_outlined,
                         color: Colors.white, size: 40),
                     colorCircle: Colors.yellow,
@@ -208,7 +217,15 @@ class _HomePage extends State<HomePage> {
               child: SizedBox(
                   width: 400,
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (ModalRoute.of(context)!.settings.name != '/history') {
+                        Navigator.pushNamed(context, '/history');
+                        setState(() {
+                          QRService.allFalse();
+                          QRService.historySelected = true;
+                        });
+                      }
+                    },
                     backgroundColor: Colors.deepPurple,
                     child: const Text(
                       'HISTORY',
@@ -216,18 +233,23 @@ class _HomePage extends State<HomePage> {
                     ),
                   )),
             ),
+            const Spacer(),
             const Padding(
-              padding: EdgeInsets.only(top: 20, left: 66, right: 66),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('2023 QRcode Limited All rights reserved',
-                      style: TextStyle(color: Colors.grey)),
-                  Text('Terms and Canditions',
-                      style: TextStyle(color: Colors.blueGrey))
-                ],
-              ),
-            )
+                padding: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('2023 QRcode Limited All rights reserved',
+                            style: TextStyle(color: Colors.grey)),
+                        Text('Terms and Canditions',
+                            style: TextStyle(color: Colors.blueGrey))
+                      ],
+                    ),
+                  ],
+                ))
           ],
         ),
       )),
