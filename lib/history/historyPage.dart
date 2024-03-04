@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
 import 'package:qrcode/history/containerHistoryQR.dart';
 import 'package:qrcode/service/qrCodeService.dart';
 
@@ -11,6 +12,22 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPage extends State<HistoryPage> {
+  List<Map<String, dynamic>> _rows = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDataFromDatabase();
+  }
+
+  Future<void> _loadDataFromDatabase() async {
+    List<Map<String, dynamic>> rows =
+        await DatabaseHelper.instance.queryAllRows('QRCODES');
+    setState(() {
+      _rows = rows;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -141,10 +158,11 @@ class _HistoryPage extends State<HistoryPage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ContainerHistoryQR(width: size.width),
-            )
+            for (var row in _rows)
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ContainerHistoryQR(width: size.width, row: row),
+              )
           ],
         ),
       )),

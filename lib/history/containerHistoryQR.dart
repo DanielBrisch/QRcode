@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qrcode/service/qrCodeService.dart';
 
 class ContainerHistoryQR extends StatefulWidget {
   final double? width;
+  final Map<String, dynamic> row;
 
-  const ContainerHistoryQR({super.key, required this.width});
+  const ContainerHistoryQR({super.key, required this.width, required this.row});
 
   @override
   State<ContainerHistoryQR> createState() => _ContainerHistoryQR();
 }
 
 class _ContainerHistoryQR extends State<ContainerHistoryQR> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,21 +33,23 @@ class _ContainerHistoryQR extends State<ContainerHistoryQR> {
         children: [
           Container(
             width: 15,
-            decoration: const BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Color(int.parse(widget.row['COLOR'], radix: 16)),
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(18),
                   bottomLeft: Radius.circular(18)),
             ),
           ),
-          const Icon(Icons.qr_code_scanner, size: 140),
+          Column(
+            children: [QrImageView(data: '${widget.row['DATA']}', size: 140)],
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Code type: ${QRService.type}'),
               Text('Element: ${QRService.element}'),
-              Text('Date: ${QRService.date}'),
+              Text('Date: ${widget.row['DATE']}'),
             ],
           ),
           IconButton(

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qrcode/appBar/mainAppBar.dart';
 import 'package:qrcode/service/qrCodeService.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -215,31 +217,49 @@ class _ScanPage extends State<ScanPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        _openUrl(result.toString());
       });
     });
   }
 
-  Future<void> exibeDialog() {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Center(
-              child: Icon(Icons.check_circle, color: Colors.green)),
-          content: const Center(
-            child: Text('Successful scanning'),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Ok'),
-            ),
-          ],
-        );
-      },
-    );
+  Center errorDialog() {
+    return Center(
+        child: SizedBox(
+            height: 300,
+            width: 450,
+            child: AlertDialog(
+              title: const Center(
+                  child: Icon(Icons.error, color: Colors.red, size: 50)),
+              content: const Center(
+                child: Text('Error reading QRcode',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+              ),
+              actions: [
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ),
+                )
+              ],
+            )));
+  }
+
+  void _openUrl(String qrCodeData) async {
+    if (await canLaunchUrlString(qrCodeData)) {
+      await launchUrlString(qrCodeData);
+      const SnackBar(
+        content: Text('Read QRCODE'),
+        duration: Duration(seconds: 2),
+      );
+    } else {
+      throw errorDialog();
+    }
   }
 
   @override

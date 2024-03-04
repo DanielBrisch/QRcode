@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
+import 'package:intl/intl.dart';
 
 class ContainerCreateQRcode extends StatefulWidget {
-  // final VoidCallback? onPressed;
-  // final Icon? icon;
-  // final Text? label;
-  // final double borderRadius;
-  // final Color colorButton;
-  // final Color? colorCircle;
-
   const ContainerCreateQRcode({
     super.key,
   });
@@ -21,7 +16,9 @@ class ContainerCreateQRcode extends StatefulWidget {
 class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
   TextEditingController? dixi = TextEditingController();
 
-  String qrText = '';
+  TextEditingController qrTextController = TextEditingController();
+
+  String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
 
   Color color = Colors.redAccent.shade200;
 
@@ -57,7 +54,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: QrImageView(
-                  data: qrText, version: QrVersions.auto, size: 148),
+                  data: qrTextController.text,
+                  version: QrVersions.auto,
+                  size: 148),
             ),
             const SizedBox(
               height: 20,
@@ -75,7 +74,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
               child: TextField(
                 onChanged: (value) {
                   setState(() {
-                    qrText = value;
+                    qrTextController.text = value;
                   });
                 },
                 decoration: const InputDecoration(
@@ -235,7 +234,14 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await DatabaseHelper.instance.insert({
+                      'DATA': qrTextController.text,
+                      'DATE': formattedDate,
+                      'COLOR': color.value.toString()
+                    }, 'QRCODES');
+                    Navigator.pushNamed(context, '/home');
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
