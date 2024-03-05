@@ -14,7 +14,7 @@ class _MainAppBar extends State<MainAppBar> {
     return Container(
       decoration: const BoxDecoration(
           color: Color.fromRGBO(240, 240, 240, 1),
-          borderRadius: BorderRadius.all(Radius.circular(25))),
+          borderRadius: BorderRadius.all(Radius.circular(20))),
       width: MediaQuery.of(context).size.width * 0.80,
       height: MediaQuery.of(context).size.height * 0.089,
       child: Row(
@@ -71,19 +71,27 @@ class _MainAppBar extends State<MainAppBar> {
           ),
           SizedBox(
             child: GestureDetector(
-              child: const Center(
+              child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(Icons.history), Text('history')],
+                  children: [
+                    Icon(Icons.history,
+                        color: QRService.setColor(QRService.historySelected)),
+                    Text('history',
+                        style: TextStyle(
+                            color:
+                                QRService.setColor(QRService.historySelected)))
+                  ],
                 ),
               ),
               onTap: () {
-                Navigator.pushNamed(context, '/history');
                 if (ModalRoute.of(context)!.settings.name != '/history') {
                   Navigator.pushNamed(context, '/history');
-                  setState(() {
-                    QRService.allFalse();
-                    QRService.historySelected = true;
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      QRService.allFalse();
+                      QRService.historySelected = true;
+                    });
                   });
                 }
               },

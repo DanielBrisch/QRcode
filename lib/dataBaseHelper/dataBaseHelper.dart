@@ -43,4 +43,10 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.query(table);
   }
+
+  Future<List<Map<String, dynamic>>> queryAllRowsOrderByDate(
+      String table) async {
+    Database db = await instance.database;
+    return await db.query(table, orderBy: 'DATE');
+  }
 }
