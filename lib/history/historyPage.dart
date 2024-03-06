@@ -162,10 +162,15 @@ class _HistoryPage extends State<HistoryPage> {
               ),
             ),
           ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: MainAppBar(),
-          ),
+          Positioned(
+            left: size.width * 0.02,
+            right: size.width * 0.02,
+            bottom: size.height * 0.02,
+            child: const Align(
+              alignment: Alignment.bottomCenter,
+              child: MainAppBar(),
+            ),
+          )
         ],
       ),
     );
@@ -173,32 +178,39 @@ class _HistoryPage extends State<HistoryPage> {
 
   List<Widget> logicWidgets(size) {
     List<Widget> widgets = [];
-    int count = 1;
+    bool firstLine = true;
     for (var row in _rows) {
-      if (row['DATE'] != lastDate && count == 1) {
-        count = 0;
+      if (firstLine == true) {
+        firstLine = false;
         lastDate = row['DATE'];
         widgets.add(Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('${row['DATE']}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20)),
-              const Row(
-                children: [
-                  Icon(Icons.tune_outlined),
-                  SizedBox(width: 20),
-                  Icon(Icons.calendar_month_outlined)
-                ],
-              )
-            ],
-          ),
-        ));
-      } else if (row['DATE'] != lastDate) {
-        Text('${row['DATE']}',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20));
+            padding: const EdgeInsets.only(top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('${row['DATE']}',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20)),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.tune_outlined),
+                        SizedBox(width: 20),
+                        Icon(Icons.calendar_month_outlined)
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            )));
+      }
+      if (row['DATE'] != lastDate) {
+        lastDate = row['DATE'];
+        widgets.add(Text('${row['DATE']}',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)));
       }
       widgets.add(
         Padding(

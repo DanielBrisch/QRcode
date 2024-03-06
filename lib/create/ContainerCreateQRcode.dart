@@ -210,7 +210,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, '/home');
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -235,12 +235,18 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                     ),
                   ),
                   onPressed: () async {
-                    await DatabaseHelper.instance.insert({
-                      'DATA': qrTextController.text,
-                      'DATE': formattedDate,
-                      'COLOR': color.value.toString()
-                    }, 'QRCODES');
-                    Navigator.pushNamed(context, '/home');
+                    if (qrTextController.text.isNotEmpty) {
+                      await DatabaseHelper.instance.insert({
+                        'DATA': qrTextController.text,
+                        'DATE': formattedDate,
+                        'COLOR': color.value.toString()
+                      }, 'QRCODES');
+                      Navigator.pushNamed(context, '/home');
+                    } else {
+                      Center(
+                        child: pleaseSave(),
+                      );
+                    }
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -257,5 +263,28 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
             )
           ],
         ));
+  }
+
+  Widget pleaseSave() {
+    return AlertDialog(
+      title: const Center(
+        child: Icon(Icons.error_rounded, color: Colors.red),
+      ),
+      content: const Center(
+        child: Text('Please, enter a URL',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+      ),
+      actions: [
+        Center(
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Ok',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          ),
+        )
+      ],
+    );
   }
 }

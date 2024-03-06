@@ -205,9 +205,14 @@ class _ScanPage extends State<ScanPage> {
                     ],
                   ),
                 ),
-                const MainAppBar(),
               ],
             )),
+        Positioned(
+          left: size.width * 0.10,
+          right: size.width * 0.10,
+          top: size.height * 0.892,
+          child: const MainAppBar(),
+        ),
       ]),
     );
   }

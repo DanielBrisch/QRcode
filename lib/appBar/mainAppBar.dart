@@ -87,11 +87,9 @@ class _MainAppBar extends State<MainAppBar> {
               onTap: () {
                 if (ModalRoute.of(context)!.settings.name != '/history') {
                   Navigator.pushNamed(context, '/history');
-                  Future.delayed(const Duration(milliseconds: 200), () {
-                    setState(() {
-                      QRService.allFalse();
-                      QRService.historySelected = true;
-                    });
+                  setState(() {
+                    QRService.allFalse();
+                    QRService.historySelected = true;
                   });
                 }
               },
