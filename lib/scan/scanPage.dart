@@ -18,9 +18,7 @@ class _ScanPage extends State<ScanPage> {
   Barcode? result;
   QRViewController? controller;
 
-  double _zoomValue = 0.5;
-
-  bool boolShowDialog = false;
+  double _zoomValue = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,239 +30,342 @@ class _ScanPage extends State<ScanPage> {
       statusBarColor: Colors.transparent,
     ));
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(children: [
-        Expanded(
-          child: QRView(
-            key: qrKey,
-            onQRViewCreated: _onQRViewCreated,
-            overlay: QrScannerOverlayShape(
-                borderColor: Colors.white,
-                borderLength: 80,
-                borderWidth: 5,
-                cutOutHeight: scanAreaHeigth,
-                cutOutWidth: scanAreaWidth),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 35, left: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                icon:
-                    const Icon(Icons.arrow_back, color: Colors.white, size: 25),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                  setState(() {
-                    QRService.allFalse();
-                  });
-                },
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(children: [
+            Expanded(
+              child: QRView(
+                key: qrKey,
+                onQRViewCreated: _onQRViewCreated,
+                overlay: QrScannerOverlayShape(
+                    borderColor: Colors.white,
+                    borderLength: 80,
+                    borderWidth: 5,
+                    cutOutHeight: scanAreaHeigth,
+                    cutOutWidth: scanAreaWidth),
               ),
-              const SizedBox(width: 20),
-              const Text('Scan',
-                  style: TextStyle(color: Colors.white, fontSize: 20))
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 120),
-          child: Align(
-              alignment: Alignment.topCenter,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 35, left: 8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        elevation: MaterialStateProperty.all(0),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const SizedBox(
-                          height: 50,
-                          width: 30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.energy_savings_leaf_outlined,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                'Lite',
-                                style: TextStyle(color: Colors.white),
-                              )
-                            ],
-                          ))),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        elevation: MaterialStateProperty.all(0),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const SizedBox(
-                          height: 50,
-                          width: 74,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.image_outlined, color: Colors.white),
-                              Text('Image scan',
-                                  style: TextStyle(color: Colors.white))
-                            ],
-                          ))),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        elevation: MaterialStateProperty.all(0),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: const SizedBox(
-                          height: 50,
-                          width: 30,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(Icons.info_outline, color: Colors.white),
-                              Text(
-                                'Help',
-                                style: TextStyle(color: Colors.white),
-                              )
-                            ],
-                          )))
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back,
+                        color: Colors.white, size: 25),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                      setState(() {
+                        QRService.allFalse();
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  const Text('Scan',
+                      style: TextStyle(color: Colors.white, fontSize: 20))
                 ],
-              )),
-        ),
-        Padding(
-            padding: EdgeInsets.only(top: size.height * 0.770),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: Align(
+                  alignment: Alignment.topCenter,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          SizedBox(
-                            width: 320,
-                            child: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                trackHeight: 4,
-                                thumbShape: const RoundSliderThumbShape(
-                                  enabledThumbRadius: 12,
-                                ),
-                              ),
-                              child: Slider(
-                                activeColor: Colors.white,
-                                value: _zoomValue,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _zoomValue = newValue;
-                                  });
-                                },
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            elevation: MaterialStateProperty.all(0),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
                               ),
                             ),
                           ),
-                          const Positioned(
-                            left: -3,
-                            child: Icon(Icons.zoom_in, color: Colors.white),
+                          onPressed: () {},
+                          child: const SizedBox(
+                              height: 50,
+                              width: 30,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.energy_savings_leaf_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Lite',
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ))),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            elevation: MaterialStateProperty.all(0),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                            ),
                           ),
-                          const Positioned(
-                            right: -3,
-                            child: Icon(Icons.zoom_out, color: Colors.white),
+                          onPressed: () {},
+                          child: const SizedBox(
+                              height: 50,
+                              width: 74,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.image_outlined,
+                                      color: Colors.white),
+                                  Text('Image scan',
+                                      style: TextStyle(color: Colors.white))
+                                ],
+                              ))),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            elevation: MaterialStateProperty.all(0),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: const SizedBox(
+                              height: 50,
+                              width: 30,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.info_outline, color: Colors.white),
+                                  Text(
+                                    'Help',
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              )))
+                    ],
+                  )),
+            ),
+            Padding(
+                padding: EdgeInsets.only(top: size.height * 0.770),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 50),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SizedBox(
+                                width: 320,
+                                child: SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    trackHeight: 4,
+                                    thumbShape: const RoundSliderThumbShape(
+                                      enabledThumbRadius: 12,
+                                    ),
+                                  ),
+                                  child: Slider(
+                                    activeColor: Colors.white,
+                                    value: _zoomValue,
+                                    min: 1.0,
+                                    max: 4.0,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _zoomValue = newValue;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const Positioned(
+                                left: -3,
+                                child: Icon(Icons.zoom_in, color: Colors.white),
+                              ),
+                              const Positioned(
+                                right: -3,
+                                child:
+                                    Icon(Icons.zoom_out, color: Colors.white),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            )),
-        Positioned(
-          left: size.width * 0.10,
-          right: size.width * 0.10,
-          top: size.height * 0.892,
-          child: const MainAppBar(),
-        ),
-      ]),
-    );
+                    ),
+                  ],
+                )),
+            Positioned(
+              left: size.width * 0.10,
+              right: size.width * 0.10,
+              top: size.height * 0.892,
+              child: const MainAppBar(),
+            ),
+          ]),
+        ));
+  }
+
+  void launchURL(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   void _onQRViewCreated(QRViewController controller) async {
     this.controller = controller;
+    bool isShowingDialog = false;
+
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        _openUrl(result.toString());
-      });
+      if (!isShowingDialog) {
+        setState(() {
+          result = scanData;
+          Uri uri = Uri.parse(result!.code!);
+          isShowingDialog = true;
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Center(
+                  child: Icon(
+                    Icons.check_circle_rounded,
+                    color: Colors.green,
+                    size: 38,
+                  ),
+                ),
+                content: Text(
+                  "URL: ${result!.code}",
+                  style: const TextStyle(fontSize: 20),
+                ),
+                actions: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            isShowingDialog = false;
+                          },
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.red, fontSize: 15),
+                          )),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            launchUrl(uri);
+                            isShowingDialog = false;
+                          },
+                          child: const Text(
+                            "Open URL",
+                            style: TextStyle(color: Colors.green, fontSize: 15),
+                          )),
+                    ],
+                  )
+                ],
+              );
+            },
+          ).then((value) {
+            isShowingDialog = false;
+          });
+        });
+      }
     });
   }
 
-  Center errorDialog() {
-    return Center(
-        child: SizedBox(
-            height: 300,
-            width: 450,
-            child: AlertDialog(
-              title: const Center(
-                  child: Icon(Icons.error, color: Colors.red, size: 50)),
-              content: const Center(
-                child: Text('Error reading QRcode',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-              ),
-              actions: [
-                Center(
-                  child: TextButton(
+  Widget scannedDialog() {
+    return AlertDialog(
+      content: SizedBox(
+        width: 200,
+        height: 250,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.check_circle_rounded,
+              color: Colors.green,
+              size: 50,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              '${result!.code}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Do you want to go to this address?',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Ok',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.red),
+                    ),
                   ),
-                )
-              ],
-            )));
-  }
-
-  void _openUrl(String qrCodeData) async {
-    if (await canLaunchUrlString(qrCodeData)) {
-      await launchUrlString(qrCodeData);
-      const SnackBar(
-        content: Text('Read QRCODE'),
-        duration: Duration(seconds: 2),
-      );
-    } else {
-      throw errorDialog();
-    }
+                  const SizedBox(width: 20),
+                  TextButton(
+                    onPressed: () async {
+                      if (await canLaunchUrlString(result!.code!)) {
+                        await launchUrlString(result!.code!);
+                        const SnackBar(
+                          content: Text('Read QRCODE'),
+                          duration: Duration(seconds: 2),
+                        );
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Ok',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.green),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   @override

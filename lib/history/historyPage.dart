@@ -148,9 +148,9 @@ class _HistoryPage extends State<HistoryPage> {
                       ),
                     ),
                   ),
-                  logicWidgets(size).isNotEmpty
+                  logicDateWidgets(size).isNotEmpty
                       ? Column(
-                          children: logicWidgets(size),
+                          children: logicDateWidgets(size),
                         )
                       : const Padding(
                           padding: EdgeInsets.only(top: 30),
@@ -176,7 +176,7 @@ class _HistoryPage extends State<HistoryPage> {
     );
   }
 
-  List<Widget> logicWidgets(size) {
+  List<Widget> logicDateWidgets(size) {
     List<Widget> widgets = [];
     bool firstLine = true;
     for (var row in _rows) {
@@ -209,8 +209,15 @@ class _HistoryPage extends State<HistoryPage> {
       }
       if (row['DATE'] != lastDate) {
         lastDate = row['DATE'];
-        widgets.add(Text('${row['DATE']}',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)));
+        widgets.add(Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text('${row['DATE']}',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+          ],
+        ));
       }
       widgets.add(
         Padding(
