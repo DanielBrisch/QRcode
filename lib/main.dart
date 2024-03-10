@@ -5,6 +5,7 @@ import 'package:qrcode/home/homePage.dart';
 import 'package:qrcode/loadingApp/loadingApp.dart';
 import 'package:qrcode/scan/scanPage.dart';
 import 'package:qrcode/send/sendPage.dart';
+import 'package:qrcode/settings/settingsPage.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,6 +15,7 @@ void main() {
       '/create': (context) => const CreatePage(),
       '/scan': (context) => const ScanPage(),
       '/send': (context) => const SendPage(),
+      '/settings': (context) => const SettingsPage(),
     },
     home: const LoginAppPage(),
     debugShowCheckedModeBanner: false,

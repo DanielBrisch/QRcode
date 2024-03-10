@@ -83,7 +83,16 @@ class _HomePage extends State<HomePage> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.info_outline),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (ModalRoute.of(context)!.settings.name !=
+                                  '/settings') {
+                                Navigator.pushNamed(context, '/settings');
+                                setState(() {
+                                  QRService.allFalse();
+                                  QRService.createSelected = true;
+                                });
+                              }
+                            },
                           ),
                           IconButton(
                             icon: const Icon(Icons.settings_outlined),
