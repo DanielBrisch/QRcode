@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:qrcode/service/qrCodeService.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -49,15 +50,30 @@ class _SettingsPage extends State<SettingsPage> {
                       height: size.height * 0.060,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
+                          backgroundColor: QRService.pageSelected
+                              ? Colors.deepPurple
+                              : const Color.fromRGBO(220, 226, 232, 1.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {},
-                        child: const Text(
+                        onPressed: () {
+                          if (ModalRoute.of(context)!.settings.name !=
+                              '/settings') {
+                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, '/settings');
+                            setState(() {
+                              QRService.pageSelected = true;
+                            });
+                          }
+                        },
+                        child: Text(
                           'General',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: QRService.pageSelected
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                       ),
                     ),
@@ -66,16 +82,30 @@ class _SettingsPage extends State<SettingsPage> {
                       height: size.height * 0.060,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromRGBO(220, 226, 232, 1.0),
+                          backgroundColor: !QRService.pageSelected
+                              ? Colors.deepPurple
+                              : const Color.fromRGBO(220, 226, 232, 1.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {},
-                        child: const Text(
+                        onPressed: () {
+                          if (ModalRoute.of(context)!.settings.name !=
+                              '/profile') {
+                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, '/profile');
+                            setState(() {
+                              QRService.pageSelected = false;
+                            });
+                          }
+                        },
+                        child: Text(
                           'Personal',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            color: !QRService.pageSelected
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                       ),
                     ),

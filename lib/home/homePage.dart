@@ -45,9 +45,20 @@ class _HomePage extends State<HomePage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage('lib/assets/img/happyguy.png'),
+                  GestureDetector(
+                    onTap: () {
+                      if (ModalRoute.of(context)!.settings.name != '/profile') {
+                        Navigator.pushNamed(context, '/profile');
+                        setState(() {
+                          QRService.pageSelected = false;
+                        });
+                      }
+                    },
+                    child: const CircleAvatar(
+                      radius: 35,
+                      backgroundImage:
+                          AssetImage('lib/assets/img/happyguy.png'),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   const Column(
@@ -85,18 +96,22 @@ class _HomePage extends State<HomePage> {
                             icon: const Icon(Icons.info_outline),
                             onPressed: () {
                               if (ModalRoute.of(context)!.settings.name !=
-                                  '/settings') {
-                                Navigator.pushNamed(context, '/settings');
-                                setState(() {
-                                  QRService.allFalse();
-                                  QRService.createSelected = true;
-                                });
+                                  '/info') {
+                                Navigator.pushNamed(context, '/info');
                               }
                             },
                           ),
                           IconButton(
                             icon: const Icon(Icons.settings_outlined),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (ModalRoute.of(context)!.settings.name !=
+                                  '/settings') {
+                                Navigator.pushNamed(context, '/settings');
+                                setState(() {
+                                  QRService.pageSelected = true;
+                                });
+                              }
+                            },
                           ),
                         ]),
                   ),

@@ -7,6 +7,8 @@ class QRService {
   static bool printSelected = false;
   static bool sendSelected = false;
 
+  static bool pageSelected = false;
+
   static String type = 'QR-Code';
   static String element = 'Dixi';
   static String date = '20.04.2020';
