@@ -94,12 +94,12 @@ class _CreatePage extends State<CreatePage> {
               ],
             ),
           ),
-          Positioned(
-            left: size.width * 0.10,
-            right: size.width * 0.10,
-            top: size.height * 0.8,
-            child: const MainAppBar(),
-          ),
+          const Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: MainAppBar(),
+              )),
         ]));
   }
 }

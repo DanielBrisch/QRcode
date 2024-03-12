@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qrcode/appBar/mainAppBar.dart';
 import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
+import 'package:qrcode/history/calendarDialog.dart';
 import 'package:qrcode/history/containerHistoryQR.dart';
 import 'package:qrcode/service/qrCodeService.dart';
 
@@ -192,14 +195,28 @@ class _HistoryPage extends State<HistoryPage> {
                 Text('${row['DATE']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 20)),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.tune_outlined),
-                        SizedBox(width: 20),
-                        Icon(Icons.calendar_month_outlined)
+                        const Icon(Icons.tune_outlined),
+                        const SizedBox(width: 20),
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CalendarDialog(
+                                    onSelectedDay: (DateTime selectedDay) {
+                                      // Aqui você pode lidar com o dia selecionado conforme necessário
+                                      log('Selected day: $selectedDay' as num);
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                            icon: const Icon(Icons.calendar_month))
                       ],
                     )
                   ],
