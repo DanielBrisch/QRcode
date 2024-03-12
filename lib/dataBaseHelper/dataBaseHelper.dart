@@ -20,16 +20,41 @@ class DatabaseHelper {
     String path =
         join((await getApplicationDocumentsDirectory()).path, _databaseName);
     return await openDatabase(path,
-        version: _databaseVersion, onCreate: _createDatabase);
+        version: _databaseVersion, onCreate: createDataBaseQR);
   }
 
-  Future<void> _createDatabase(Database db, int version) async {
+  Future<void> createDataBaseQR(Database db, int version) async {
     await db.execute('''
       CREATE TABLE QRCODES (
         ID INTEGER PRIMARY KEY,
         DATA TEXT,
         DATE TEXT,
         COLOR TEXT
+      )
+    ''');
+  }
+
+  Future<void> createDataBaseUser(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE USER (
+        ID INTEGER PRIMARY KEY,
+        NAME TEXT,
+        LASTNAME TEXT,
+        POSITION TEXT,
+        EMAIL TEXT
+      )
+    ''');
+  }
+
+  Future<void> createDataBaseSettigns(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE SETTINGS (
+        CONTINUSSCAN INTEGER,
+        DUPLICATEBARCODE INTEGER,
+        SCANBYHAND INTEGER,
+        MUTE INTEGER,
+        VIBRATION INTEGER,
+        COPYTOCLIPBOARD INTEGER
       )
     ''');
   }
@@ -48,5 +73,16 @@ class DatabaseHelper {
       String table) async {
     Database db = await instance.database;
     return await db.query(table, orderBy: 'DATE');
+  }
+
+  Future<List<Map<String, dynamic>>> querryAllRowsUser() async {
+    Database db = await instance.database;
+    return await db.query('USER');
+  }
+
+  Future<List<Map<String, dynamic>>> queryNameById() async {
+    Database db = await instance.database;
+    return await db.query('USER',
+        columns: ['NAME'], where: 'ID = ?', whereArgs: [1]);
   }
 }

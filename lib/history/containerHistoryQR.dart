@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qrcode/service/qrCodeService.dart';
+import 'package:share/share.dart';
 
 class ContainerHistoryQR extends StatefulWidget {
   final double? width;
@@ -53,7 +54,9 @@ class _ContainerHistoryQR extends State<ContainerHistoryQR> {
             ],
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Share.share('${widget.row['DATA']}');
+              },
               icon: const Icon(Icons.arrow_forward_ios_outlined))
         ],
       ),

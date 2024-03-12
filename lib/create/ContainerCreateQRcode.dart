@@ -244,7 +244,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                       Navigator.pushNamed(context, '/home');
                     } else {
                       Center(
-                        child: pleaseSave(),
+                        child: errorSave(),
                       );
                     }
                   },
@@ -265,7 +265,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
         ));
   }
 
-  Widget pleaseSave() {
+  Widget errorSave() {
     return AlertDialog(
       title: const Center(
         child: Icon(Icons.error_rounded, color: Colors.red),

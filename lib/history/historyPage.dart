@@ -162,15 +162,15 @@ class _HistoryPage extends State<HistoryPage> {
               ),
             ),
           ),
-          Positioned(
-            left: size.width * 0.02,
-            right: size.width * 0.02,
-            bottom: size.height * 0.02,
-            child: const Align(
-              alignment: Alignment.bottomCenter,
-              child: MainAppBar(),
-            ),
-          )
+          const Padding(
+              padding: EdgeInsets.only(bottom: 18),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: MainAppBar(),
+                ),
+              )),
         ],
       ),
     );

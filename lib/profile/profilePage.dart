@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:qrcode/dataBaseHelper/dataBaseHelper.dart';
 import 'package:qrcode/service/qrCodeService.dart';
+import 'package:sqflite/sqflite.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -10,6 +12,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePage extends State<ProfilePage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController positionController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  List<Map<String, dynamic>> _rows = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -135,11 +143,17 @@ class _ProfilePage extends State<ProfilePage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const Text(
-                    'Daniel',
-                    style: TextStyle(
-                      color: Colors.black,
+                  TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter your name',
+                      hintStyle:
+                          TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
+                    onEditingComplete: () {
+                      saveNameUserProfile();
+                    },
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -148,11 +162,17 @@ class _ProfilePage extends State<ProfilePage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const Text(
-                    'Brisch',
-                    style: TextStyle(
-                      color: Colors.black,
+                  TextField(
+                    controller: lastNameController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter your last name',
+                      hintStyle:
+                          TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
+                    onEditingComplete: () {
+                      saveLastNameUserProfile();
+                    },
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -161,11 +181,17 @@ class _ProfilePage extends State<ProfilePage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const Text(
-                    'Mobile Developer',
-                    style: TextStyle(
-                      color: Colors.black,
+                  TextField(
+                    controller: positionController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter your position',
+                      hintStyle:
+                          TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
+                    onEditingComplete: () {
+                      savePositionUserProfile();
+                    },
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -174,18 +200,29 @@ class _ProfilePage extends State<ProfilePage> {
                       color: Colors.grey,
                     ),
                   ),
-                  const Text(
-                    'danielbrisch159@gmail.com',
-                    style: TextStyle(
-                      color: Colors.black,
+                  TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter your email',
+                      hintStyle:
+                          TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
+                    onEditingComplete: () {
+                      saveEmailUserProfile();
+                    },
                   ),
                   SizedBox(height: size.height * 0.030),
-                  const Text(
-                    'Log out',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      confirmLogOutDialog(context);
+                    },
+                    child: const Text(
+                      'Log out',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                   SizedBox(height: size.height * 0.030),
@@ -199,5 +236,95 @@ class _ProfilePage extends State<ProfilePage> {
                 ],
               )
             ])));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDataFromDatabase();
+  }
+
+  Future<void> _loadDataFromDatabase() async {
+    List<Map<String, dynamic>> rows =
+        await DatabaseHelper.instance.queryAllRows('QRCODES');
+    setState(() {
+      _rows = rows;
+    });
+  }
+
+  void confirmLogOutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(
+            child: Text("Really? 😰😰"),
+          ),
+          content: const Text("Are you sure you want to quit?",
+              style: TextStyle(fontSize: 20)),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    "No",
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    "Yes",
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void saveNameUserProfile() async {
+    await DatabaseHelper.instance.insert({
+      'NAME': nameController.text,
+    }, 'USER');
+  }
+
+  void saveLastNameUserProfile() async {
+    await DatabaseHelper.instance.insert({
+      'LASTNAME': lastNameController.text,
+    }, 'USER');
+  }
+
+  void savePositionUserProfile() async {
+    await DatabaseHelper.instance.insert({
+      'POSITION': positionController.text,
+    }, 'USER');
+  }
+
+  void saveEmailUserProfile() async {
+    await DatabaseHelper.instance.insert({
+      'EMAIL': emailController.text,
+    }, 'USER');
+  }
+
+  @override
+  void dispose() {
+    saveNameUserProfile();
+    super.dispose();
   }
 }
