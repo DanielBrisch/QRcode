@@ -208,10 +208,7 @@ class _HistoryPage extends State<HistoryPage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return CalendarDialog(
-                                    onSelectedDay: (DateTime selectedDay) {
-                                      // Aqui você pode lidar com o dia selecionado conforme necessário
-                                      log('Selected day: $selectedDay' as num);
-                                    },
+                                    onSelectedDay: (DateTime selectedDay) {},
                                   );
                                 },
                               );
