@@ -1,16 +1,39 @@
-# qrcode
+# Full QRCode Project
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    div {
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+    <div>
+        <h2>StartPage</h2> 
+        <img src="./lib/assets/img/start.png">
+        <h2>HomePage</h2>
+        <img src="./lib/assets/img/home.png">
+        <h2>CreatePage</h2>
+        <img src="./lib/assets/img/create.png">
+        <h2>ScanPage</h2>
+        <img src="./lib/assets/img/scan.png">
+        <h2>HistoryPage</h2>
+        <img src="./lib/assets/img/history.png">
+        <h2>PersonalPage</h2>
+        <img src="./lib/assets/img/personal.png">
+        <h2>SettingsPage</h2>
+        <img src="./lib/assets/img/settings.png">
+    </div>
+</body>
+</html>
