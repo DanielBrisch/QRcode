@@ -1,3 +1,6 @@
+# Full QRCode Project
+### This application contains profile, settings, create, scan, history, print and send
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
