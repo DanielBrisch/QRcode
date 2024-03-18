@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div style="display: flex; flex-direction: column; text-align: start;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
         <h2>StartPage</h2> 
         <img src="./lib/assets/img/start.png" style="margin: 0 auto;">
         <h2>HomePage</h2>
