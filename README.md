@@ -1,39 +1,25 @@
-# Full QRCode Project
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    div {
-        text-align: left;
-    }
-</style>
 </head>
 <body>
-    <div>
+    <div style="display: flex; flex-direction: column; text-align: start;">
         <h2>StartPage</h2> 
-        <img src="./lib/assets/img/start.png">
+        <img src="./lib/assets/img/start.png" style="margin: 0 auto;">
         <h2>HomePage</h2>
-        <img src="./lib/assets/img/home.png">
+        <img src="./lib/assets/img/home.png" style="margin: 0 auto;">
         <h2>CreatePage</h2>
-        <img src="./lib/assets/img/create.png">
+        <img src="./lib/assets/img/create.png" style="margin: 0 auto;">
         <h2>ScanPage</h2>
-        <img src="./lib/assets/img/scan.png">
+        <img src="./lib/assets/img/scan.png" style="margin: 0 auto;">
         <h2>HistoryPage</h2>
-        <img src="./lib/assets/img/history.png">
+        <img src="./lib/assets/img/history.png" style="margin: 0 auto;">
         <h2>PersonalPage</h2>
-        <img src="./lib/assets/img/personal.png">
+        <img src="./lib/assets/img/personal.png" style="margin: 0 auto;">
         <h2>SettingsPage</h2>
-        <img src="./lib/assets/img/settings.png">
+        <img src="./lib/assets/img/settings.png" style="margin: 0 auto;">
     </div>
 </body>
 </html>
