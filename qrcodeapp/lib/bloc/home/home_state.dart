@@ -9,6 +9,8 @@ abstract class HomeState extends Equatable {
 
 class HomeInitial extends HomeState {}
 
+class HomeLoading extends HomeState {}
+
 class UserProfileLoaded extends HomeState {
   final String name;
   final String job;
@@ -17,4 +19,13 @@ class UserProfileLoaded extends HomeState {
 
   @override
   List<Object> get props => [name, job];
+}
+
+class HomeError extends HomeState {
+  final String message;
+
+  const HomeError(this.message);
+
+  @override
+  List<Object> get props => [message];
 }

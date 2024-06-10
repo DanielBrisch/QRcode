@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qrcodeapp/bloc/home_bloc.dart';
+import 'package:qrcodeapp/bloc/home/home_bloc.dart';
 import 'package:qrcodeapp/screens/home_page.dart';
 
 void main() {
