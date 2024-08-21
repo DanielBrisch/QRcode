@@ -21,6 +21,7 @@ dependencies:
   share: ^2.0.4
   table_calendar: ^3.0.0
   flutter_triple: ^3.0.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

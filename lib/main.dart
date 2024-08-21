@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode/pages/create_page.dart';
-import 'package:qrcode/pages/history_page.dart';
-import 'package:qrcode/pages/home_page.dart';
-import 'package:qrcode/pages/info_page.dart';
-import 'package:qrcode/pages/loading_app_page.dart';
-import 'package:qrcode/pages/profile_page.dart';
-import 'package:qrcode/pages/scan_page.dart';
-import 'package:qrcode/pages/send_page.dart';
-import 'package:qrcode/pages/settings_page.dart';
+import 'package:qrcode/views/create_page.dart';
+import 'package:qrcode/views/history_page.dart';
+import 'package:qrcode/views/home_page.dart';
+import 'package:qrcode/views/info_page.dart';
+import 'package:qrcode/views/loading_app_page.dart';
+import 'package:qrcode/views/profile_page.dart';
+import 'package:qrcode/views/scan_page.dart';
+import 'package:qrcode/views/send_page.dart';
+import 'package:qrcode/views/settings_page.dart';
 
 void main() {
   runApp(MaterialApp(
