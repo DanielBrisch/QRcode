@@ -1,1 +1,0 @@
-a branch main está sendo refeita aplicando o padrao bloc

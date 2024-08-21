@@ -20,6 +20,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   share: ^2.0.4
   table_calendar: ^3.0.0
+  flutter_triple: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -33,4 +34,3 @@ flutter:
 
   assets:
     - lib/assets/img/happyguy.png
-    - lib/assets/img/qrcode.png
