@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qrcode/dataBase/dataBase.dart';
-import 'package:qrcode/service/qrCodeService.dart';
 import 'package:qrcode/widgets/calendar_dialog.dart';
 import 'package:qrcode/widgets/container_history_qr_code.dart';
 
@@ -58,9 +57,6 @@ class _HistoryPage extends State<HistoryPage> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pushNamed(context, '/home');
-            setState(() {
-              QRService.allFalse();
-            });
           },
         ),
       ),
@@ -81,18 +77,18 @@ class _HistoryPage extends State<HistoryPage> {
                             children: [
                               ElevatedButton(
                                   style: ButtonStyle(
-                                    elevation: MaterialStateProperty.all(0),
-                                    shape: MaterialStateProperty.all<
+                                    elevation: WidgetStateProperty.all(0),
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all<
+                                    backgroundColor: WidgetStateProperty.all<
                                             Color>(
                                         const Color.fromRGBO(240, 240, 240, 1)),
-                                    fixedSize: MaterialStateProperty.all<Size>(
+                                    fixedSize: WidgetStateProperty.all<Size>(
                                         const Size(170.0, 50.0)),
                                   ),
                                   onPressed: () {},
@@ -104,7 +100,7 @@ class _HistoryPage extends State<HistoryPage> {
                                   )),
                               ElevatedButton(
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
@@ -112,9 +108,9 @@ class _HistoryPage extends State<HistoryPage> {
                                       ),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
+                                        WidgetStateProperty.all<Color>(
                                             Colors.deepPurple),
-                                    fixedSize: MaterialStateProperty.all<Size>(
+                                    fixedSize: WidgetStateProperty.all<Size>(
                                         const Size(170.0, 50.0)),
                                   ),
                                   onPressed: () {},

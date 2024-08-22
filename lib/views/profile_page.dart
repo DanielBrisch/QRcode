@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qrcode/dataBase/dataBase.dart';
-import 'package:qrcode/service/qrCodeService.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -44,30 +43,27 @@ class _ProfilePage extends State<ProfilePage> {
                     height: size.height * 0.060,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: QRService.pageSelected
-                            ? Colors.deepPurple
-                            : const Color.fromRGBO(220, 226, 232, 1.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                          // backgroundColor: QRService.pageSelected
+                          //     ? Colors.deepPurple
+                          //     : const Color.fromRGBO(220, 226, 232, 1.0),
+                          // shape: RoundedRectangleBorder(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
+                          ),
                       onPressed: () {
                         if (ModalRoute.of(context)!.settings.name !=
                             '/settings') {
                           Navigator.of(context).pop();
                           Navigator.pushNamed(context, '/settings');
-                          setState(() {
-                            QRService.pageSelected = true;
-                          });
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'General',
                         style: TextStyle(
-                          color: QRService.pageSelected
-                              ? Colors.white
-                              : Colors.black,
-                        ),
+                            // color: QRService.pageSelected
+                            //     ? Colors.white
+                            //     : Colors.black,
+                            ),
                       ),
                     ),
                   ),
@@ -76,30 +72,27 @@ class _ProfilePage extends State<ProfilePage> {
                     height: size.height * 0.060,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: !QRService.pageSelected
-                            ? Colors.deepPurple
-                            : const Color.fromRGBO(220, 226, 232, 1.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                          // backgroundColor: !QRService.pageSelected
+                          //     ? Colors.deepPurple
+                          //     : const Color.fromRGBO(220, 226, 232, 1.0),
+                          // shape: RoundedRectangleBorder(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
+                          ),
                       onPressed: () {
                         if (ModalRoute.of(context)!.settings.name !=
                             '/profile') {
                           Navigator.of(context).pop();
                           Navigator.pushNamed(context, '/profile');
-                          setState(() {
-                            QRService.pageSelected = false;
-                          });
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Personal',
                         style: TextStyle(
-                          color: !QRService.pageSelected
-                              ? Colors.white
-                              : Colors.black,
-                        ),
+                            // color: !QRService.pageSelected
+                            //     ? Colors.white
+                            //     : Colors.black,
+                            ),
                       ),
                     ),
                   ),
@@ -116,8 +109,7 @@ class _ProfilePage extends State<ProfilePage> {
                       height: size.height * 0.2,
                       child: const CircleAvatar(
                         radius: 35,
-                        backgroundImage:
-                            AssetImage('lib/assets/img/happyguy.png'),
+                        backgroundImage: AssetImage('lib/assets/happyguy.png'),
                       ),
                     ),
                     SizedBox(height: size.height * 0.030),

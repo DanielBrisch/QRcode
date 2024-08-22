@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qrcode/service/qrCodeService.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -57,9 +56,6 @@ class _ScanPage extends State<ScanPage> {
                         color: Colors.white, size: 25),
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
-                      setState(() {
-                        QRService.allFalse();
-                      });
                     },
                   ),
                   const SizedBox(width: 20),
@@ -79,9 +75,9 @@ class _ScanPage extends State<ScanPage> {
                       ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            elevation: MaterialStateProperty.all(0),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(Colors.transparent),
+                            elevation: WidgetStateProperty.all(0),
+                            shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -109,9 +105,9 @@ class _ScanPage extends State<ScanPage> {
                       ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            elevation: MaterialStateProperty.all(0),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(Colors.transparent),
+                            elevation: WidgetStateProperty.all(0),
+                            shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -135,9 +131,9 @@ class _ScanPage extends State<ScanPage> {
                       ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            elevation: MaterialStateProperty.all(0),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(Colors.transparent),
+                            elevation: WidgetStateProperty.all(0),
+                            shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),

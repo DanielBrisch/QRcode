@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarDialog extends StatefulWidget {
@@ -85,9 +82,9 @@ class _CalendarDialogState extends State<CalendarDialog> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all(
+                        WidgetStateProperty.all(Colors.transparent),
+                    elevation: WidgetStateProperty.all(0),
+                    shape: WidgetStateProperty.all(
                       const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
@@ -107,9 +104,9 @@ class _CalendarDialogState extends State<CalendarDialog> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all(
+                        WidgetStateProperty.all(Colors.transparent),
+                    elevation: WidgetStateProperty.all(0),
+                    shape: WidgetStateProperty.all(
                       const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),

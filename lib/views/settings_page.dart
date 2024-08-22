@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:qrcode/service/qrCodeService.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -50,30 +49,27 @@ class _SettingsPage extends State<SettingsPage> {
                       height: size.height * 0.060,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: QRService.pageSelected
-                              ? Colors.deepPurple
-                              : const Color.fromRGBO(220, 226, 232, 1.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+                            // backgroundColor: QRService.pageSelected
+                            //     ? Colors.deepPurple
+                            //     : const Color.fromRGBO(220, 226, 232, 1.0),
+                            // shape: RoundedRectangleBorder(
+                            //   borderRadius: BorderRadius.circular(10),
+                            // ),
+                            ),
                         onPressed: () {
                           if (ModalRoute.of(context)!.settings.name !=
                               '/settings') {
                             Navigator.of(context).pop();
                             Navigator.pushNamed(context, '/settings');
-                            setState(() {
-                              QRService.pageSelected = true;
-                            });
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'General',
                           style: TextStyle(
-                            color: QRService.pageSelected
-                                ? Colors.white
-                                : Colors.black,
-                          ),
+                              // color: QRService.pageSelected
+                              //     ? Colors.white
+                              //     : Colors.black,
+                              ),
                         ),
                       ),
                     ),
@@ -82,30 +78,27 @@ class _SettingsPage extends State<SettingsPage> {
                       height: size.height * 0.060,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: !QRService.pageSelected
-                              ? Colors.deepPurple
-                              : const Color.fromRGBO(220, 226, 232, 1.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+                            // backgroundColor: !QRService.pageSelected
+                            //     ? Colors.deepPurple
+                            //     : const Color.fromRGBO(220, 226, 232, 1.0),
+                            // shape: RoundedRectangleBorder(
+                            //   borderRadius: BorderRadius.circular(10),
+                            // ),
+                            ),
                         onPressed: () {
                           if (ModalRoute.of(context)!.settings.name !=
                               '/profile') {
                             Navigator.of(context).pop();
                             Navigator.pushNamed(context, '/profile');
-                            setState(() {
-                              QRService.pageSelected = false;
-                            });
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'Personal',
                           style: TextStyle(
-                            color: !QRService.pageSelected
-                                ? Colors.white
-                                : Colors.black,
-                          ),
+                              // color: !QRService.pageSelected
+                              //     ? Colors.white
+                              //     : Colors.black,
+                              ),
                         ),
                       ),
                     ),
@@ -125,106 +118,100 @@ class _SettingsPage extends State<SettingsPage> {
                       ),
                     ),
                     SizedBox(height: size.height * 0.040),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Continus scan',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Continus scan',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text('Adds scans only\nin history'),
-                            ],
-                          ),
-                          Switch(
-                            value: continusScanCheck,
-                            onChanged: (value) {
-                              setState(() {
-                                continusScanCheck = value;
-                              });
-                            },
-                            activeColor: Colors.purple,
-                            inactiveThumbColor: Colors.grey,
-                            activeTrackColor: Colors.purple[100],
-                            inactiveTrackColor: Colors.grey[300],
-                          ),
-                        ],
-                      ),
+                            ),
+                            Text('Adds scans only\nin history'),
+                          ],
+                        ),
+                        Switch(
+                          value: continusScanCheck,
+                          onChanged: (value) {
+                            setState(() {
+                              continusScanCheck = value;
+                            });
+                          },
+                          activeColor: Colors.purple,
+                          inactiveThumbColor: Colors.grey,
+                          activeTrackColor: Colors.purple[100],
+                          inactiveTrackColor: Colors.grey[300],
+                        ),
+                      ],
                     ),
                     SizedBox(height: size.height * 0.040),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Duplicate barcodes',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Duplicate barcodes',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text('Keep duplicates\nbar codes in the history'),
-                            ],
-                          ),
-                          Switch(
-                            value: scansByHand,
-                            onChanged: (value) {
-                              setState(() {
-                                scansByHand = value;
-                              });
-                            },
-                            activeColor: Colors.purple,
-                            inactiveThumbColor: Colors.grey,
-                            activeTrackColor: Colors.purple[100],
-                            inactiveTrackColor: Colors.grey[300],
-                          ),
-                        ],
-                      ),
+                            ),
+                            Text('Keep duplicates\nbar codes in the history'),
+                          ],
+                        ),
+                        Switch(
+                          value: scansByHand,
+                          onChanged: (value) {
+                            setState(() {
+                              scansByHand = value;
+                            });
+                          },
+                          activeColor: Colors.purple,
+                          inactiveThumbColor: Colors.grey,
+                          activeTrackColor: Colors.purple[100],
+                          inactiveTrackColor: Colors.grey[300],
+                        ),
+                      ],
                     ),
                     SizedBox(height: size.height * 0.040),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'To confirm the scans by hand',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'To confirm the scans by hand',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text('To avoid accident scans'),
-                            ],
-                          ),
-                          Switch(
-                            value: duplicateBarCodesCheck,
-                            onChanged: (value) {
-                              setState(() {
-                                duplicateBarCodesCheck = value;
-                              });
-                            },
-                            activeColor: Colors.purple,
-                            inactiveThumbColor: Colors.grey,
-                            activeTrackColor: Colors.purple[100],
-                            inactiveTrackColor: Colors.grey[300],
-                          ),
-                        ],
-                      ),
+                            ),
+                            Text('To avoid accident scans'),
+                          ],
+                        ),
+                        Switch(
+                          value: duplicateBarCodesCheck,
+                          onChanged: (value) {
+                            setState(() {
+                              duplicateBarCodesCheck = value;
+                            });
+                          },
+                          activeColor: Colors.purple,
+                          inactiveThumbColor: Colors.grey,
+                          activeTrackColor: Colors.purple[100],
+                          inactiveTrackColor: Colors.grey[300],
+                        ),
+                      ],
                     ),
                     SizedBox(height: size.height * 0.030),
                     Row(

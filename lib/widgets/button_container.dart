@@ -2,28 +2,25 @@ import 'package:flutter/material.dart';
 
 class ContainerButton extends StatelessWidget {
   final VoidCallback? onPressed;
-  final Icon? icon;
-  final Text? label;
-  final double borderRadius;
-  final Color colorButton;
-  final Color? colorCircle;
+  final Icon icon;
+  final Text label;
+  final Color colorCircle;
+  final double borderRadius = 20;
+  final Color colorButton = Colors.white;
 
-  const ContainerButton(
-      {super.key,
-      this.onPressed,
-      this.icon,
-      this.label,
-      this.borderRadius = 8.0,
-      this.colorButton = Colors.white,
-      this.colorCircle});
+  const ContainerButton({
+    super.key,
+    required this.onPressed,
+    required this.icon,
+    required this.label,
+    required this.colorCircle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: 160,
-        width: 150,
         decoration: BoxDecoration(
           color: colorButton,
           borderRadius: BorderRadius.circular(borderRadius),
@@ -45,10 +42,10 @@ class ContainerButton extends StatelessWidget {
               width: 60,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40), color: colorCircle),
-              child: icon!,
+              child: icon,
             ),
             const SizedBox(height: 20),
-            label!,
+            label,
           ],
         ),
       ),

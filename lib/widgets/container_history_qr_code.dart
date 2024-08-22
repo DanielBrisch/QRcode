@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qrcode/service/qrCodeService.dart';
+import 'package:qrcode/service/qr_code_service.dart';
 import 'package:share/share.dart';
 
 class ContainerHistoryQR extends StatefulWidget {

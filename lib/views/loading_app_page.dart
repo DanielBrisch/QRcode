@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/views/home_page.dart';
 
 class LoginAppPage extends StatefulWidget {
@@ -24,7 +25,9 @@ class _LoginAppPage extends State<LoginAppPage> {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          decoration: const BoxDecoration(color: Colors.deepPurpleAccent),
+          decoration: BoxDecoration(
+            color: ColorUtils().purple,
+          ),
           child: Column(
             children: [
               Expanded(

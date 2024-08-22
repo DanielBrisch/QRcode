@@ -200,9 +200,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all(
+                        WidgetStateProperty.all(Colors.transparent),
+                    elevation: WidgetStateProperty.all(0),
+                    shape: WidgetStateProperty.all(
                       const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),

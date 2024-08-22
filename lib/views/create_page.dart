@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:qrcode/service/qrCodeService.dart';
 import 'package:qrcode/widgets/container_create_qr_code.dart';
 
 class CreatePage extends StatefulWidget {
@@ -30,9 +29,6 @@ class _CreatePage extends State<CreatePage> {
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               Navigator.pushNamed(context, '/home');
-              setState(() {
-                QRService.allFalse();
-              });
             },
           ),
           actions: <Widget>[
