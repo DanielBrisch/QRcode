@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -8,7 +7,6 @@ import 'package:qrcode/stores/home_store.dart';
 import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/widgets/button_container.dart';
 
-@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -94,8 +92,6 @@ class _HomePage extends State<HomePage> {
           store: store,
           onState: (_, state) {
             return Container(
-              width: size.width,
-              height: size.height,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,

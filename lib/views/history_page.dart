@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:qrcode/dataBase/dataBase.dart';
-import 'package:qrcode/widgets/calendar_dialog.dart';
-import 'package:qrcode/widgets/container_history_qr_code.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -12,22 +9,6 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPage extends State<HistoryPage> {
-  List<Map<String, dynamic>> _rows = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadDataFromDatabase();
-  }
-
-  Future<void> _loadDataFromDatabase() async {
-    List<Map<String, dynamic>> rows =
-        await DatabaseHelper.instance.queryAllRowsOrderByDate('QRCODES');
-    setState(() {
-      _rows = rows;
-    });
-  }
-
   String? lastDate;
 
   @override
@@ -174,65 +155,68 @@ class _HistoryPage extends State<HistoryPage> {
 
   List<Widget> logicDateWidgets(size) {
     List<Widget> widgets = [];
-    bool firstLine = true;
-    for (var row in _rows) {
-      if (firstLine == true) {
-        firstLine = false;
-        lastDate = row['DATE'];
-        widgets.add(Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('${row['DATE']}',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.tune_outlined),
-                        const SizedBox(width: 20),
-                        IconButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CalendarDialog(
-                                    onSelectedDay: (DateTime selectedDay) {},
-                                  );
-                                },
-                              );
-                            },
-                            icon: const Icon(Icons.calendar_month))
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            )));
-      }
-      if (row['DATE'] != lastDate) {
-        lastDate = row['DATE'];
-        widgets.add(Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text('${row['DATE']}',
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-          ],
-        ));
-      }
-      widgets.add(
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: ContainerHistoryQR(width: size.width, row: row),
-        ),
-      );
-    }
+    // bool firstLine = true;
+    // for (var row in _rows) {
+    //   if (firstLine == true) {
+    //     firstLine = false;
+    //     lastDate = row['DATE'];
+    //     widgets.add(
+    //       Padding(
+    //         padding: const EdgeInsets.only(top: 20),
+    //         child: Row(
+    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           children: [
+    //             Text('${row['DATE']}',
+    //                 style: const TextStyle(
+    //                     fontWeight: FontWeight.bold, fontSize: 20)),
+    //             Row(
+    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //               children: [
+    //                 Row(
+    //                   children: [
+    //                     const Icon(Icons.tune_outlined),
+    //                     const SizedBox(width: 20),
+    //                     IconButton(
+    //                         onPressed: () {
+    //                           showDialog(
+    //                             context: context,
+    //                             builder: (BuildContext context) {
+    //                               return CalendarDialog(
+    //                                 onSelectedDay: (DateTime selectedDay) {},
+    //                               );
+    //                             },
+    //                           );
+    //                         },
+    //                         icon: const Icon(Icons.calendar_month))
+    //                   ],
+    //                 )
+    //               ],
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     );
+    //   }
+    //   if (row['DATE'] != lastDate) {
+    //     lastDate = row['DATE'];
+    //     widgets.add(Row(
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       mainAxisAlignment: MainAxisAlignment.start,
+    //       children: [
+    //         Text('${row['DATE']}',
+    //             style:
+    //                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+    //       ],
+    //     ));
+    //   }
+    //   widgets.add(
+    //     Padding(
+    //       padding: const EdgeInsets.only(top: 20),
+    //       child: ContainerHistoryQR(width: size.width, row: row),
+    //     ),
+    //   );
+    // }
     return widgets;
   }
 }

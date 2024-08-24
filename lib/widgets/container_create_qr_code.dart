@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qrcode/dataBase/dataBase.dart';
 
 class ContainerCreateQRcode extends StatefulWidget {
   const ContainerCreateQRcode({
@@ -233,20 +232,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
                       ),
                     ),
                   ),
-                  onPressed: () async {
-                    if (qrTextController.text.isNotEmpty) {
-                      await DatabaseHelper.instance.insert({
-                        'DATA': qrTextController.text,
-                        'DATE': formattedDate,
-                        'COLOR': color.value.toString()
-                      }, 'QRCODES');
-                      Navigator.pushNamed(context, '/home');
-                    } else {
-                      Center(
-                        child: errorSave(),
-                      );
-                    }
-                  },
+                  onPressed: () async {},
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:qrcode/dataBase/dataBase.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -142,9 +141,7 @@ class _ProfilePage extends State<ProfilePage> {
                       hintStyle:
                           TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
-                    onEditingComplete: () {
-                      saveNameUserProfile();
-                    },
+                    onEditingComplete: () {},
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -161,9 +158,7 @@ class _ProfilePage extends State<ProfilePage> {
                       hintStyle:
                           TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
-                    onEditingComplete: () {
-                      saveLastNameUserProfile();
-                    },
+                    onEditingComplete: () {},
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -180,9 +175,7 @@ class _ProfilePage extends State<ProfilePage> {
                       hintStyle:
                           TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
-                    onEditingComplete: () {
-                      savePositionUserProfile();
-                    },
+                    onEditingComplete: () {},
                   ),
                   SizedBox(height: size.height * 0.030),
                   const Text(
@@ -199,9 +192,7 @@ class _ProfilePage extends State<ProfilePage> {
                       hintStyle:
                           TextStyle(color: Colors.purple.withOpacity(0.5)),
                     ),
-                    onEditingComplete: () {
-                      saveEmailUserProfile();
-                    },
+                    onEditingComplete: () {},
                   ),
                   SizedBox(height: size.height * 0.030),
                   GestureDetector(
@@ -227,20 +218,6 @@ class _ProfilePage extends State<ProfilePage> {
                 ],
               )
             ])));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadDataFromDatabase();
-  }
-
-  Future<void> _loadDataFromDatabase() async {
-    List<Map<String, dynamic>> rows =
-        await DatabaseHelper.instance.queryAllRows('QRCODES');
-    setState(() {
-      _rows = rows;
-    });
   }
 
   void confirmLogOutDialog(BuildContext context) {
@@ -287,35 +264,5 @@ class _ProfilePage extends State<ProfilePage> {
         );
       },
     );
-  }
-
-  void saveNameUserProfile() async {
-    await DatabaseHelper.instance.insert({
-      'NAME': nameController.text,
-    }, 'USER');
-  }
-
-  void saveLastNameUserProfile() async {
-    await DatabaseHelper.instance.insert({
-      'LASTNAME': lastNameController.text,
-    }, 'USER');
-  }
-
-  void savePositionUserProfile() async {
-    await DatabaseHelper.instance.insert({
-      'POSITION': positionController.text,
-    }, 'USER');
-  }
-
-  void saveEmailUserProfile() async {
-    await DatabaseHelper.instance.insert({
-      'EMAIL': emailController.text,
-    }, 'USER');
-  }
-
-  @override
-  void dispose() {
-    saveNameUserProfile();
-    super.dispose();
   }
 }
