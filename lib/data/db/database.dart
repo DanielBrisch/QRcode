@@ -4,12 +4,13 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:qrcode/data/table/settings_table.dart';
 import 'package:qrcode/data/table/user_table.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [User])
-class DataBase extends _$MyDataBase {
+@DriftDatabase(tables: [UsersData, SettingsData])
+class DataBase extends _$DataBase {
   DataBase() : super(_openConnection());
   @override
   int get schemaVersion => 1;

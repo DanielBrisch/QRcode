@@ -1,7 +1,11 @@
 import 'package:drift/drift.dart';
 
-class Users extends Table {
+@DataClassName('UsersTable')
+class UsersData extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text()();
-  TextColumn get role => text().nullable()();
+  TextColumn get firstName => text()();
+  TextColumn get lastName => text()();
+  TextColumn get position => text()();
+  TextColumn get email => text()();
+  TextColumn get image => text()();
 }

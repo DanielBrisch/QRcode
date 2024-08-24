@@ -1,7 +1,8 @@
 import 'package:qrcode/data/db/database.dart';
+import 'package:qrcode/model/User.dart';
 
 abstract class IUserRepository {
-  Future<List<User>> get getAllUsers;
+  Future<List<UsersTable>> get getAllUsers;
 
-  Future<void> insertUser(String name, String role);
+  Future<void> insertUser(User user);
 }
