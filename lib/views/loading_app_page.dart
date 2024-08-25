@@ -21,9 +21,10 @@ class _LoginAppPage extends State<LoginAppPage> {
       );
     });
 
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return Scaffold(
+      backgroundColor: ColorUtils().purple,
+      body: SafeArea(
+        child: Container(
           width: double.maxFinite,
           decoration: BoxDecoration(
             color: ColorUtils().purple,
@@ -38,13 +39,13 @@ class _LoginAppPage extends State<LoginAppPage> {
                     Icon(
                       Icons.qr_code_outlined,
                       size: screenSize.aspectRatio * 200,
-                      color: Colors.white,
+                      color: ColorUtils().white,
                     ),
                     Text(
                       'QRcode',
                       style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: ColorUtils().white,
                         fontSize: 50,
                       ),
                     ),
@@ -52,7 +53,7 @@ class _LoginAppPage extends State<LoginAppPage> {
                       'storage',
                       style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: ColorUtils().white,
                         fontSize: 50,
                       ),
                     ),
@@ -65,7 +66,7 @@ class _LoginAppPage extends State<LoginAppPage> {
                   'version 1.0',
                   style: GoogleFonts.roboto(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ColorUtils().white,
                   ),
                 ),
               ),

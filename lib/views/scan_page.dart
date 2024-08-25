@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qrcode/utils/color_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -38,7 +39,7 @@ class _ScanPage extends State<ScanPage> {
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
                 overlay: QrScannerOverlayShape(
-                    borderColor: Colors.white,
+                    borderColor: ColorUtils().white,
                     borderLength: 80,
                     borderWidth: 5,
                     cutOutHeight: scanAreaHeigth,
@@ -52,15 +53,15 @@ class _ScanPage extends State<ScanPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back,
-                        color: Colors.white, size: 25),
+                    icon: Icon(Icons.arrow_back,
+                        color: ColorUtils().white, size: 25),
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
                   ),
                   const SizedBox(width: 20),
-                  const Text('Scan',
-                      style: TextStyle(color: Colors.white, fontSize: 20))
+                  Text('Scan',
+                      style: TextStyle(color: ColorUtils().white, fontSize: 20))
                 ],
               ),
             ),
@@ -73,35 +74,37 @@ class _ScanPage extends State<ScanPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Colors.transparent),
-                            elevation: WidgetStateProperty.all(0),
-                            shape: WidgetStateProperty.all(
-                              const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                              ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all(Colors.transparent),
+                          elevation: WidgetStateProperty.all(0),
+                          shape: WidgetStateProperty.all(
+                            const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
                             ),
                           ),
-                          onPressed: () {},
-                          child: const SizedBox(
-                              height: 50,
-                              width: 30,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.energy_savings_leaf_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  Text(
-                                    'Lite',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ))),
+                        ),
+                        onPressed: () {},
+                        child: SizedBox(
+                          height: 50,
+                          width: 30,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.energy_savings_leaf_outlined,
+                                color: ColorUtils().white,
+                              ),
+                              Text(
+                                'Lite',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
@@ -181,7 +184,7 @@ class _ScanPage extends State<ScanPage> {
                                     ),
                                   ),
                                   child: Slider(
-                                    activeColor: Colors.white,
+                                    activeColor: ColorUtils().white,
                                     value: _zoomValue,
                                     min: 1.0,
                                     max: 4.0,

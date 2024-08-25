@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qrcode/utils/color_utils.dart';
 
 class ContainerCreateQRcode extends StatefulWidget {
   const ContainerCreateQRcode({
@@ -27,7 +28,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
         width: 320,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
-          color: Colors.white,
+          color: ColorUtils().white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -63,7 +64,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
               width: 280,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+                color: ColorUtils().white,
                 border: Border.all(
                   color: Colors.grey,
                   width: 2,

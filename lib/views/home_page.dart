@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/stores/home_store.dart';
 import 'package:qrcode/utils/color_utils.dart';
+import 'package:qrcode/views/loading_page.dart';
 import 'package:qrcode/widgets/button_container.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    HomeStore store = HomeStore();
+    final HomeStore store = context.read<HomeStore>();
     Size size = MediaQuery.of(context).size;
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -28,9 +30,9 @@ class _HomePage extends State<HomePage> {
       ContainerButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.create),
         colorCircle: ColorUtils().purple,
-        icon: const Icon(
+        icon: Icon(
           Icons.add_circle_outline,
-          color: Colors.white,
+          color: ColorUtils().white,
           size: 35,
         ),
         label: const Text(
@@ -43,8 +45,8 @@ class _HomePage extends State<HomePage> {
       ),
       ContainerButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.scan),
-        icon: const Icon(Icons.qr_code_scanner_outlined,
-            color: Colors.white, size: 35),
+        icon: Icon(Icons.qr_code_scanner_outlined,
+            color: ColorUtils().white, size: 35),
         colorCircle: Colors.redAccent,
         label: const Text(
           'SCAN',
@@ -56,7 +58,7 @@ class _HomePage extends State<HomePage> {
       ),
       ContainerButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.send),
-        icon: const Icon(Icons.mail_outlined, color: Colors.white, size: 40),
+        icon: Icon(Icons.mail_outlined, color: ColorUtils().white, size: 40),
         colorCircle: Colors.yellow,
         label: const Text(
           'SEND',
@@ -68,9 +70,9 @@ class _HomePage extends State<HomePage> {
       ),
       ContainerButton(
         onPressed: () {},
-        icon: const Icon(
+        icon: Icon(
           Icons.print_outlined,
-          color: Colors.white,
+          color: ColorUtils().white,
           size: 40,
         ),
         colorCircle: Colors.green,
@@ -86,19 +88,21 @@ class _HomePage extends State<HomePage> {
 
     Size screenSize = MediaQuery.of(context).size;
 
-    return SafeArea(
-      child: Scaffold(
-        body: ScopedBuilder<HomeStore, HomeState>(
-          store: store,
-          onState: (_, state) {
-            return Container(
-              decoration: const BoxDecoration(
+    return Scaffold(
+      backgroundColor: ColorUtils().faintGray,
+      body: ScopedBuilder<HomeStore, HomeState>(
+        store: store,
+        onLoading: (context) => LoadingPage(),
+        onState: (_, state) {
+          return SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromRGBO(220, 226, 232, 1.0),
-                    Colors.white,
+                    ColorUtils().faintGray,
+                    ColorUtils().white,
                   ],
                 ),
               ),
@@ -110,92 +114,89 @@ class _HomePage extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () => Navigator.pushNamed(
-                                    context, AppRoutes.profile),
-                                child: Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: ColorUtils().purple,
-                                      width: 4.0,
-                                    ),
-                                  ),
-                                  child: const CircleAvatar(
-                                    radius: 35,
-                                    backgroundImage:
-                                        AssetImage('lib/assets/happyguy.png'),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes.profile),
+                              child: Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: ColorUtils().purple,
+                                    width: 4.0,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Daniel',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: size.aspectRatio * 35,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Cibolli',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: size.aspectRatio * 35,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Mobile developer',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey[700],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: size.height * 0.05,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(8),
-                                right: Radius.circular(8),
+                                child: CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage:
+                                      AssetImage('${state.user!.image}'),
+                                ),
                               ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                IconButton(
-                                  icon: const Icon(Icons.info_outline),
-                                  onPressed: () => Navigator.pushNamed(
-                                      context, AppRoutes.info),
+                                Text(
+                                  state.user!.firstName,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: size.aspectRatio * 35,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.settings_outlined),
-                                  onPressed: () => Navigator.pushNamed(
-                                      context, AppRoutes.settings),
+                                Text(
+                                  state.user!.lastName,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: size.aspectRatio * 35,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                Text(
+                                  state.user!.position,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey[700],
+                                  ),
                                 ),
                               ],
                             ),
+                          ],
+                        ),
+                        Container(
+                          height: size.height * 0.05,
+                          decoration: BoxDecoration(
+                            color: ColorUtils().white,
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(8),
+                              right: Radius.circular(8),
+                            ),
                           ),
-                        ],
-                      ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.info_outline),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, AppRoutes.info),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.settings_outlined),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, AppRoutes.settings),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: screenSize.height * 0.02,
@@ -236,9 +237,12 @@ class _HomePage extends State<HomePage> {
                         onPressed: () =>
                             Navigator.pushNamed(context, AppRoutes.history),
                         backgroundColor: ColorUtils().purple,
-                        child: const Text(
+                        child: Text(
                           'HISTORY',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: ColorUtils().white,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -265,9 +269,9 @@ class _HomePage extends State<HomePage> {
                   ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qrcode/utils/color_utils.dart';
 
-class SendPage extends StatefulWidget {
-  const SendPage({super.key});
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({super.key});
 
-  @override
-  State<SendPage> createState() => _SendPage();
-}
-
-class _SendPage extends State<SendPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -17,9 +12,14 @@ class _SendPage extends State<SendPage> {
     ));
 
     return Scaffold(
-      body: SingleChildScrollView(
+      backgroundColor: ColorUtils().white,
+      body: SafeArea(
         child: Container(
-          color: ColorUtils().white,
+          child: Center(
+            child: CircularProgressIndicator(
+              color: ColorUtils().purple,
+            ),
+          ),
         ),
       ),
     );
