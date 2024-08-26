@@ -1,6 +1,7 @@
 import 'package:qrcode/data/db/database.dart';
 import 'package:qrcode/data/repositorys/user/i_user_repository.dart';
-import 'package:qrcode/model/User.dart';
+
+import '../../../model/user_model.dart';
 
 class UserRepository implements IUserRepository {
   final database = DataBase();
@@ -9,11 +10,10 @@ class UserRepository implements IUserRepository {
   Future<void> insertUser(User user) async {
     await database.into(database.usersData).insert(
           UsersDataCompanion.insert(
-              firstName: user.firstName,
-              lastName: user.lastName,
-              position: user.position,
-              email: user.email,
-              image: user.image),
+            firstName: user.firstName,
+            email: user.email,
+            image: user.image,
+          ),
         );
   }
 

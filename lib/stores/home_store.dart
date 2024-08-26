@@ -1,6 +1,7 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:qrcode/data/repositorys/user/i_user_repository.dart';
-import 'package:qrcode/model/User.dart';
+
+import '../model/user_model.dart';
 
 class HomeState {
   User? user;
@@ -26,8 +27,6 @@ class HomeStore extends Store<HomeState> {
     final firstUser = result.first;
     state.user = User(
       firstName: firstUser.firstName,
-      lastName: firstUser.lastName,
-      position: firstUser.position,
       email: firstUser.email,
       image: firstUser.image,
     );

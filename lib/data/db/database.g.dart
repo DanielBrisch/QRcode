@@ -24,18 +24,6 @@ class $UsersDataTable extends UsersData
   late final GeneratedColumn<String> firstName = GeneratedColumn<String>(
       'first_name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _lastNameMeta =
-      const VerificationMeta('lastName');
-  @override
-  late final GeneratedColumn<String> lastName = GeneratedColumn<String>(
-      'last_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _positionMeta =
-      const VerificationMeta('position');
-  @override
-  late final GeneratedColumn<String> position = GeneratedColumn<String>(
-      'position', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _emailMeta = const VerificationMeta('email');
   @override
   late final GeneratedColumn<String> email = GeneratedColumn<String>(
@@ -47,8 +35,7 @@ class $UsersDataTable extends UsersData
       'image', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, firstName, lastName, position, email, image];
+  List<GeneratedColumn> get $columns => [id, firstName, email, image];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -67,18 +54,6 @@ class $UsersDataTable extends UsersData
           firstName.isAcceptableOrUnknown(data['first_name']!, _firstNameMeta));
     } else if (isInserting) {
       context.missing(_firstNameMeta);
-    }
-    if (data.containsKey('last_name')) {
-      context.handle(_lastNameMeta,
-          lastName.isAcceptableOrUnknown(data['last_name']!, _lastNameMeta));
-    } else if (isInserting) {
-      context.missing(_lastNameMeta);
-    }
-    if (data.containsKey('position')) {
-      context.handle(_positionMeta,
-          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
-    } else if (isInserting) {
-      context.missing(_positionMeta);
     }
     if (data.containsKey('email')) {
       context.handle(
@@ -105,10 +80,6 @@ class $UsersDataTable extends UsersData
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       firstName: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}first_name'])!,
-      lastName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}last_name'])!,
-      position: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}position'])!,
       email: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}email'])!,
       image: attachedDatabase.typeMapping
@@ -125,15 +96,11 @@ class $UsersDataTable extends UsersData
 class UsersTable extends DataClass implements Insertable<UsersTable> {
   final int id;
   final String firstName;
-  final String lastName;
-  final String position;
   final String email;
   final String image;
   const UsersTable(
       {required this.id,
       required this.firstName,
-      required this.lastName,
-      required this.position,
       required this.email,
       required this.image});
   @override
@@ -141,8 +108,6 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['first_name'] = Variable<String>(firstName);
-    map['last_name'] = Variable<String>(lastName);
-    map['position'] = Variable<String>(position);
     map['email'] = Variable<String>(email);
     map['image'] = Variable<String>(image);
     return map;
@@ -152,8 +117,6 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     return UsersDataCompanion(
       id: Value(id),
       firstName: Value(firstName),
-      lastName: Value(lastName),
-      position: Value(position),
       email: Value(email),
       image: Value(image),
     );
@@ -165,8 +128,6 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     return UsersTable(
       id: serializer.fromJson<int>(json['id']),
       firstName: serializer.fromJson<String>(json['firstName']),
-      lastName: serializer.fromJson<String>(json['lastName']),
-      position: serializer.fromJson<String>(json['position']),
       email: serializer.fromJson<String>(json['email']),
       image: serializer.fromJson<String>(json['image']),
     );
@@ -177,25 +138,16 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'firstName': serializer.toJson<String>(firstName),
-      'lastName': serializer.toJson<String>(lastName),
-      'position': serializer.toJson<String>(position),
       'email': serializer.toJson<String>(email),
       'image': serializer.toJson<String>(image),
     };
   }
 
   UsersTable copyWith(
-          {int? id,
-          String? firstName,
-          String? lastName,
-          String? position,
-          String? email,
-          String? image}) =>
+          {int? id, String? firstName, String? email, String? image}) =>
       UsersTable(
         id: id ?? this.id,
         firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        position: position ?? this.position,
         email: email ?? this.email,
         image: image ?? this.image,
       );
@@ -203,8 +155,6 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     return UsersTable(
       id: data.id.present ? data.id.value : this.id,
       firstName: data.firstName.present ? data.firstName.value : this.firstName,
-      lastName: data.lastName.present ? data.lastName.value : this.lastName,
-      position: data.position.present ? data.position.value : this.position,
       email: data.email.present ? data.email.value : this.email,
       image: data.image.present ? data.image.value : this.image,
     );
@@ -215,8 +165,6 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
     return (StringBuffer('UsersTable(')
           ..write('id: $id, ')
           ..write('firstName: $firstName, ')
-          ..write('lastName: $lastName, ')
-          ..write('position: $position, ')
           ..write('email: $email, ')
           ..write('image: $image')
           ..write(')'))
@@ -224,16 +172,13 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, firstName, lastName, position, email, image);
+  int get hashCode => Object.hash(id, firstName, email, image);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is UsersTable &&
           other.id == this.id &&
           other.firstName == this.firstName &&
-          other.lastName == this.lastName &&
-          other.position == this.position &&
           other.email == this.email &&
           other.image == this.image);
 }
@@ -241,43 +186,31 @@ class UsersTable extends DataClass implements Insertable<UsersTable> {
 class UsersDataCompanion extends UpdateCompanion<UsersTable> {
   final Value<int> id;
   final Value<String> firstName;
-  final Value<String> lastName;
-  final Value<String> position;
   final Value<String> email;
   final Value<String> image;
   const UsersDataCompanion({
     this.id = const Value.absent(),
     this.firstName = const Value.absent(),
-    this.lastName = const Value.absent(),
-    this.position = const Value.absent(),
     this.email = const Value.absent(),
     this.image = const Value.absent(),
   });
   UsersDataCompanion.insert({
     this.id = const Value.absent(),
     required String firstName,
-    required String lastName,
-    required String position,
     required String email,
     required String image,
   })  : firstName = Value(firstName),
-        lastName = Value(lastName),
-        position = Value(position),
         email = Value(email),
         image = Value(image);
   static Insertable<UsersTable> custom({
     Expression<int>? id,
     Expression<String>? firstName,
-    Expression<String>? lastName,
-    Expression<String>? position,
     Expression<String>? email,
     Expression<String>? image,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (firstName != null) 'first_name': firstName,
-      if (lastName != null) 'last_name': lastName,
-      if (position != null) 'position': position,
       if (email != null) 'email': email,
       if (image != null) 'image': image,
     });
@@ -286,15 +219,11 @@ class UsersDataCompanion extends UpdateCompanion<UsersTable> {
   UsersDataCompanion copyWith(
       {Value<int>? id,
       Value<String>? firstName,
-      Value<String>? lastName,
-      Value<String>? position,
       Value<String>? email,
       Value<String>? image}) {
     return UsersDataCompanion(
       id: id ?? this.id,
       firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      position: position ?? this.position,
       email: email ?? this.email,
       image: image ?? this.image,
     );
@@ -308,12 +237,6 @@ class UsersDataCompanion extends UpdateCompanion<UsersTable> {
     }
     if (firstName.present) {
       map['first_name'] = Variable<String>(firstName.value);
-    }
-    if (lastName.present) {
-      map['last_name'] = Variable<String>(lastName.value);
-    }
-    if (position.present) {
-      map['position'] = Variable<String>(position.value);
     }
     if (email.present) {
       map['email'] = Variable<String>(email.value);
@@ -329,8 +252,6 @@ class UsersDataCompanion extends UpdateCompanion<UsersTable> {
     return (StringBuffer('UsersDataCompanion(')
           ..write('id: $id, ')
           ..write('firstName: $firstName, ')
-          ..write('lastName: $lastName, ')
-          ..write('position: $position, ')
           ..write('email: $email, ')
           ..write('image: $image')
           ..write(')'))
@@ -698,16 +619,12 @@ abstract class _$DataBase extends GeneratedDatabase {
 typedef $$UsersDataTableCreateCompanionBuilder = UsersDataCompanion Function({
   Value<int> id,
   required String firstName,
-  required String lastName,
-  required String position,
   required String email,
   required String image,
 });
 typedef $$UsersDataTableUpdateCompanionBuilder = UsersDataCompanion Function({
   Value<int> id,
   Value<String> firstName,
-  Value<String> lastName,
-  Value<String> position,
   Value<String> email,
   Value<String> image,
 });
@@ -722,16 +639,6 @@ class $$UsersDataTableFilterComposer
 
   ColumnFilters<String> get firstName => $state.composableBuilder(
       column: $state.table.firstName,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get lastName => $state.composableBuilder(
-      column: $state.table.lastName,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get position => $state.composableBuilder(
-      column: $state.table.position,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -756,16 +663,6 @@ class $$UsersDataTableOrderingComposer
 
   ColumnOrderings<String> get firstName => $state.composableBuilder(
       column: $state.table.firstName,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get lastName => $state.composableBuilder(
-      column: $state.table.lastName,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get position => $state.composableBuilder(
-      column: $state.table.position,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -802,32 +699,24 @@ class $$UsersDataTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> firstName = const Value.absent(),
-            Value<String> lastName = const Value.absent(),
-            Value<String> position = const Value.absent(),
             Value<String> email = const Value.absent(),
             Value<String> image = const Value.absent(),
           }) =>
               UsersDataCompanion(
             id: id,
             firstName: firstName,
-            lastName: lastName,
-            position: position,
             email: email,
             image: image,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String firstName,
-            required String lastName,
-            required String position,
             required String email,
             required String image,
           }) =>
               UsersDataCompanion.insert(
             id: id,
             firstName: firstName,
-            lastName: lastName,
-            position: position,
             email: email,
             image: image,
           ),

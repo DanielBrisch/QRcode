@@ -19,7 +19,7 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
 
   String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
 
-  Color color = Colors.redAccent.shade200;
+  Color color = ColorUtils().red;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,9 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
         height: 415,
         width: 320,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
           color: ColorUtils().white,
           boxShadow: [
             BoxShadow(
@@ -86,114 +88,117 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
             ),
             const SizedBox(height: 20),
             SizedBox(
-                width: 230,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.redAccent.shade200;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.redAccent.shade200,
-                            ),
-                            child: null,
-                          )),
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.orange;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.orange,
-                            ),
-                            child: null,
-                          )),
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.yellow;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.yellow,
-                            ),
-                            child: null,
-                          )),
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.green;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.green,
-                            ),
-                            child: null,
-                          )),
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.lightGreenAccent;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.lightGreenAccent,
-                            ),
-                            child: null,
-                          )),
-                      SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                color = Colors.deepPurpleAccent;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              backgroundColor: Colors.deepPurpleAccent,
-                            ),
-                            child: null,
-                          ))
-                    ])),
-            const SizedBox(height: 45),
+              width: 230,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          color = ColorUtils().red;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        backgroundColor: ColorUtils().red,
+                      ),
+                      child: null,
+                    ),
+                  ),
+                  SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            color = ColorUtils().orange;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          backgroundColor: ColorUtils().orange,
+                        ),
+                        child: null,
+                      )),
+                  SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            color = ColorUtils().yellow;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          backgroundColor: ColorUtils().yellow,
+                        ),
+                        child: null,
+                      )),
+                  SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            color = ColorUtils().green;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          backgroundColor: ColorUtils().green,
+                        ),
+                        child: null,
+                      )),
+                  SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            color = ColorUtils().lightGreenAccent;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          backgroundColor: ColorUtils().lightGreenAccent,
+                        ),
+                        child: null,
+                      )),
+                  SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          color = ColorUtils().purple;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        backgroundColor: ColorUtils().purple,
+                      ),
+                      child: null,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -257,8 +262,10 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
         child: Icon(Icons.error_rounded, color: Colors.red),
       ),
       content: const Center(
-        child: Text('Please, enter a URL',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+        child: Text(
+          'Please, enter a URL',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+        ),
       ),
       actions: [
         Center(
@@ -266,8 +273,10 @@ class _ContainerCreateQRcode extends State<ContainerCreateQRcode> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Ok',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            child: const Text(
+              'Ok',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
           ),
         )
       ],

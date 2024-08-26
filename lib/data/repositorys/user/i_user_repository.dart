@@ -1,5 +1,6 @@
 import 'package:qrcode/data/db/database.dart';
-import 'package:qrcode/model/User.dart';
+
+import '../../../model/user_model.dart';
 
 abstract class IUserRepository {
   Future<List<UsersTable>> get getAllUsers;

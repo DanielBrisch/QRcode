@@ -14,7 +14,6 @@ class _ProfilePage extends State<ProfilePage> {
   TextEditingController positionController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
-  List<Map<String, dynamic>> _rows = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

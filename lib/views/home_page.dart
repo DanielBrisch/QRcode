@@ -7,7 +7,8 @@ import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/stores/home_store.dart';
 import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/views/loading_page.dart';
-import 'package:qrcode/widgets/button_container.dart';
+import 'package:qrcode/widgets/button_options_container.dart';
+import 'package:qrcode/widgets/principal_bottom_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,70 +27,62 @@ class _HomePage extends State<HomePage> {
       statusBarColor: Colors.transparent,
     ));
 
-    final List<ContainerButton> listaDeContainer = [
-      ContainerButton(
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.create),
+    final List<ContainerOptionButton> listaDeContainer = [
+      ContainerOptionButton(
+        onPressed: () => Navigator.pushNamed(context, AppRoutes.history),
         colorCircle: ColorUtils().purple,
         icon: Icon(
-          Icons.add_circle_outline,
+          Icons.history,
           color: ColorUtils().white,
-          size: 35,
+          size: 30,
         ),
-        label: const Text(
-          'CREATE',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        label: 'HISTORY',
       ),
-      ContainerButton(
+      ContainerOptionButton(
+          onPressed: () => Navigator.pushNamed(context, AppRoutes.create),
+          colorCircle: Colors.blue,
+          icon: Icon(
+            Icons.add_circle_outline,
+            color: ColorUtils().white,
+            size: 30,
+          ),
+          label: 'CREATE'),
+      ContainerOptionButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.scan),
-        icon: Icon(Icons.qr_code_scanner_outlined,
-            color: ColorUtils().white, size: 35),
+        icon: Icon(
+          Icons.qr_code_scanner_outlined,
+          color: ColorUtils().white,
+          size: 30,
+        ),
         colorCircle: Colors.redAccent,
-        label: const Text(
-          'SCAN',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        label: 'SCAN',
       ),
-      ContainerButton(
+      ContainerOptionButton(
         onPressed: () => Navigator.pushNamed(context, AppRoutes.send),
-        icon: Icon(Icons.mail_outlined, color: ColorUtils().white, size: 40),
-        colorCircle: Colors.yellow,
-        label: const Text(
-          'SEND',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+        icon: Icon(
+          Icons.mail_outlined,
+          color: ColorUtils().white,
+          size: 30,
         ),
+        colorCircle: ColorUtils().orange,
+        label: 'SEND',
       ),
-      ContainerButton(
+      ContainerOptionButton(
         onPressed: () {},
         icon: Icon(
           Icons.print_outlined,
           color: ColorUtils().white,
-          size: 40,
+          size: 30,
         ),
         colorCircle: Colors.green,
-        label: const Text(
-          'PRINT',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        label: 'PRINT',
       )
     ];
 
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: ColorUtils().faintGray,
+      backgroundColor: ColorUtils().white,
       body: ScopedBuilder<HomeStore, HomeState>(
         store: store,
         onLoading: (context) => LoadingPage(),
@@ -101,8 +94,8 @@ class _HomePage extends State<HomePage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    ColorUtils().faintGray,
                     ColorUtils().white,
+                    ColorUtils().faintGray,
                   ],
                 ),
               ),
@@ -112,20 +105,21 @@ class _HomePage extends State<HomePage> {
                   right: 25,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
-                                  context, AppRoutes.profile),
+                                context,
+                                AppRoutes.profile,
+                              ),
                               child: Container(
-                                width: 80,
-                                height: 80,
+                                width: 60,
+                                height: 60,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -135,136 +129,81 @@ class _HomePage extends State<HomePage> {
                                 ),
                                 child: CircleAvatar(
                                   radius: 35,
-                                  backgroundImage:
-                                      AssetImage('${state.user!.image}'),
+                                  backgroundImage: AssetImage(
+                                    '${state.user!.image}',
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
-                            Column(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
+                                  'Hello, ',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: size.aspectRatio * 40,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                Text(
                                   state.user!.firstName,
                                   style: GoogleFonts.roboto(
-                                    fontSize: size.aspectRatio * 35,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  state.user!.lastName,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: size.aspectRatio * 35,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  state.user!.position,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey[700],
+                                    fontSize: size.aspectRatio * 40,
+                                    fontWeight: FontWeight.w700,
+                                    color: ColorUtils().purple,
                                   ),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        Container(
-                          height: size.height * 0.05,
-                          decoration: BoxDecoration(
-                            color: ColorUtils().white,
-                            borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(8),
-                              right: Radius.circular(8),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.info_outline),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, AppRoutes.info),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.settings_outlined),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, AppRoutes.settings),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: screenSize.height * 0.02,
-                    ),
-                    Text(
-                      'Welcome',
-                      style: GoogleFonts.roboto(
-                          fontSize: size.aspectRatio * 80, color: Colors.black),
-                    ),
-                    Text(
-                      'to QRcode App',
-                      style: GoogleFonts.roboto(
-                          fontSize: size.aspectRatio * 80, color: Colors.black),
-                    ),
-                    Expanded(
-                      child: GridView.count(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(0),
-                        crossAxisCount: 2,
-                        children: List.generate(
-                          listaDeContainer.length,
-                          (index) {
-                            return Container(
-                              padding: const EdgeInsets.only(
-                                top: 10,
-                                left: 10,
-                                right: 10,
-                              ),
-                              child: listaDeContainer[index],
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: screenSize.width * 1,
-                      child: FloatingActionButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, AppRoutes.history),
-                        backgroundColor: ColorUtils().purple,
-                        child: Text(
-                          'HISTORY',
-                          style: TextStyle(
-                            color: ColorUtils().white,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: screenSize.height * 0.015,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        Row(
                           children: [
-                            Text('2023 QRcode Limited All rights reserved',
-                                style: TextStyle(color: Colors.grey)),
-                            Text('Terms and Canditions',
-                                style: TextStyle(color: Colors.blueGrey))
+                            IconButton(
+                              icon: const Icon(Icons.info_outline),
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, AppRoutes.info),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.settings_outlined),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, AppRoutes.settings),
+                            ),
                           ],
                         ),
                       ],
                     ),
                     SizedBox(
                       height: screenSize.height * 0.02,
+                    ),
+                    Text(
+                      'Welcome to QRcode App',
+                      style: GoogleFonts.roboto(
+                          fontSize: size.aspectRatio * 50,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Expanded(
+                      child: GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.all(0),
+                        crossAxisCount: 1,
+                        childAspectRatio: 4,
+                        children: List.generate(
+                          listaDeContainer.length,
+                          (index) {
+                            return Container(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                              ),
+                              child: listaDeContainer[index],
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -273,6 +212,7 @@ class _HomePage extends State<HomePage> {
           );
         },
       ),
+      bottomNavigationBar: PrincipalBottomAppBar(),
     );
   }
 }
