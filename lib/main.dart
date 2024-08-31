@@ -4,7 +4,7 @@ import 'package:qrcode/data/repositorys/user/i_user_repository.dart';
 import 'package:qrcode/data/repositorys/user/user_repository.dart';
 import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/stores/home_store.dart';
-import 'package:qrcode/views/loading_app_page.dart';
+import 'package:qrcode/views/splash_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model/user_model.dart';
@@ -28,7 +28,7 @@ void main() async {
       ],
       child: MaterialApp(
         routes: AppRoutes.getRoutes(),
-        home: const LoginAppPage(),
+        home: const SplashPage(),
         debugShowCheckedModeBanner: false,
       ),
     ),

@@ -15,6 +15,16 @@ class LoadingPage extends StatelessWidget {
       backgroundColor: ColorUtils().white,
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                ColorUtils().white,
+                ColorUtils().faintGray,
+              ],
+            ),
+          ),
           child: Center(
             child: CircularProgressIndicator(
               color: ColorUtils().purple,

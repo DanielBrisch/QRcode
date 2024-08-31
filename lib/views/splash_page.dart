@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qrcode/utils/color_utils.dart';
-import 'package:qrcode/views/home_page.dart';
+import 'package:qrcode/views/login/login_selection_page.dart';
 
-class LoginAppPage extends StatefulWidget {
-  const LoginAppPage({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<LoginAppPage> createState() => _LoginAppPage();
+  State<SplashPage> createState() => _LoginAppPage();
 }
 
-class _LoginAppPage extends State<LoginAppPage> {
+class _LoginAppPage extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(
+          builder: (context) => const LoginSelectionPage(),
+        ),
       );
     });
 

@@ -9,4 +9,5 @@ class ColorUtils {
   final Color yellow = Colors.yellow;
   final Color green = Colors.green;
   final Color lightGreenAccent = Colors.lightGreenAccent;
+  final Color gray = Color(0xff818181);
 }
