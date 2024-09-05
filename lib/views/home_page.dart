@@ -89,6 +89,7 @@ class _HomePage extends State<HomePage> {
         onState: (_, state) {
           return SafeArea(
             child: Container(
+              height: double.maxFinite,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,

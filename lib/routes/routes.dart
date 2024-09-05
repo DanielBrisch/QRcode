@@ -4,6 +4,7 @@ import 'package:qrcode/views/history_page.dart';
 import 'package:qrcode/views/home_page.dart';
 import 'package:qrcode/views/info_page.dart';
 import 'package:qrcode/views/login/login_selection_page.dart';
+import 'package:qrcode/views/login/sing_in_page.dart';
 import 'package:qrcode/views/profile_page.dart';
 import 'package:qrcode/views/scan_page.dart';
 import 'package:qrcode/views/send_page.dart';
@@ -19,6 +20,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String info = '/info';
   static const String loginSelection = '/loginSelection';
+  static const String singIn = '/singIn';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -30,7 +32,8 @@ class AppRoutes {
       settings: (context) => const SettingsPage(),
       profile: (context) => const ProfilePage(),
       info: (context) => const InfoPage(),
-      loginSelection: (context) => LoginSelectionPage()
+      loginSelection: (context) => LoginSelectionPage(),
+      singIn: (context) => SingInPage(),
     };
   }
 }
