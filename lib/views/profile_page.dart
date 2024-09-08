@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -27,6 +28,11 @@ class _ProfilePage extends State<ProfilePage> {
           title: const Text(
             'Personal',
             style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          leading: BackButton(
+            onPressed: () {
+              context.go('/home');
+            },
           ),
         ),
         body: SingleChildScrollView(

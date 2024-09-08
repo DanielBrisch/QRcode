@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/widgets/container_create_qr_code.dart';
 
@@ -35,7 +35,7 @@ class _CreatePage extends State<CreatePage> {
         leading: BackButton(
           color: ColorUtils().white,
           onPressed: () {
-            Navigator.pushNamed(context, AppRoutes.home);
+            context.go('/home');
           },
         ),
         actions: [

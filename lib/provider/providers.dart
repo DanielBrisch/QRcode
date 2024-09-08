@@ -16,7 +16,9 @@ class AppProviders extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider<IUserRepository>.value(value: userRepository),
+        Provider<IUserRepository>.value(
+          value: userRepository,
+        ),
         Provider<HomeStore>(
           create: (context) => HomeStore(
             userRepository: context.read<IUserRepository>(),

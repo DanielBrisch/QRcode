@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/stores/home_store.dart';
 import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/views/loading_page.dart';
@@ -29,7 +29,7 @@ class _HomePage extends State<HomePage> {
 
     final List<ContainerOptionButton> listaDeContainer = [
       ContainerOptionButton(
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.history),
+        onPressed: () => context.go('/history'),
         colorCircle: ColorUtils().purple,
         icon: Icon(
           Icons.history,
@@ -39,7 +39,7 @@ class _HomePage extends State<HomePage> {
         label: 'HISTORY',
       ),
       ContainerOptionButton(
-          onPressed: () => Navigator.pushNamed(context, AppRoutes.create),
+          onPressed: () => context.go('/create'),
           colorCircle: Colors.blue,
           icon: Icon(
             Icons.add_circle_outline,
@@ -48,7 +48,7 @@ class _HomePage extends State<HomePage> {
           ),
           label: 'CREATE'),
       ContainerOptionButton(
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.scan),
+        onPressed: () => context.go('/scan'),
         icon: Icon(
           Icons.qr_code_scanner_outlined,
           color: ColorUtils().white,
@@ -58,7 +58,7 @@ class _HomePage extends State<HomePage> {
         label: 'SCAN',
       ),
       ContainerOptionButton(
-        onPressed: () => Navigator.pushNamed(context, AppRoutes.send),
+        onPressed: () => context.go('/send'),
         icon: Icon(
           Icons.mail_outlined,
           color: ColorUtils().white,
@@ -114,10 +114,7 @@ class _HomePage extends State<HomePage> {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () => Navigator.pushNamed(
-                                context,
-                                AppRoutes.profile,
-                              ),
+                              onTap: () => context.go('/profile'),
                               child: Container(
                                 width: 60,
                                 height: 60,
@@ -165,13 +162,11 @@ class _HomePage extends State<HomePage> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.info_outline),
-                              onPressed: () =>
-                                  Navigator.pushNamed(context, AppRoutes.info),
+                              onPressed: () => context.go('/info'),
                             ),
                             IconButton(
                               icon: const Icon(Icons.settings_outlined),
-                              onPressed: () => Navigator.pushNamed(
-                                  context, AppRoutes.settings),
+                              onPressed: () => context.go('/settings'),
                             ),
                           ],
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qrcode/views/create_page.dart';
 import 'package:qrcode/views/history_page.dart';
 import 'package:qrcode/views/home_page.dart';
@@ -10,30 +11,71 @@ import 'package:qrcode/views/scan_page.dart';
 import 'package:qrcode/views/send_page.dart';
 import 'package:qrcode/views/settings_page.dart';
 
-class AppRoutes {
-  static const String home = '/home';
-  static const String history = '/history';
-  static const String create = '/create';
-  static const String scan = '/scan';
-  static const String send = '/send';
-  static const String settings = '/settings';
-  static const String profile = '/profile';
-  static const String info = '/info';
-  static const String loginSelection = '/loginSelection';
-  static const String singIn = '/singIn';
-
-  static Map<String, WidgetBuilder> getRoutes() {
-    return {
-      home: (context) => const HomePage(),
-      history: (context) => const HistoryPage(),
-      create: (context) => const CreatePage(),
-      scan: (context) => const ScanPage(),
-      send: (context) => const SendPage(),
-      settings: (context) => const SettingsPage(),
-      profile: (context) => const ProfilePage(),
-      info: (context) => const InfoPage(),
-      loginSelection: (context) => LoginSelectionPage(),
-      singIn: (context) => SingInPage(),
-    };
-  }
+class Routes {
+  final GoRouter router = GoRouter(
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const LoginSelectionPage();
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'home',
+            builder: (BuildContext context, GoRouterState state) {
+              return const HomePage();
+            },
+          ),
+          GoRoute(
+            path: 'singIn',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SingInPage();
+            },
+          ),
+          GoRoute(
+            path: 'history',
+            builder: (BuildContext context, GoRouterState state) {
+              return const HistoryPage();
+            },
+          ),
+          GoRoute(
+            path: 'create',
+            builder: (BuildContext context, GoRouterState state) {
+              return const CreatePage();
+            },
+          ),
+          GoRoute(
+            path: 'scan',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ScanPage();
+            },
+          ),
+          GoRoute(
+            path: 'profile',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ProfilePage();
+            },
+          ),
+          GoRoute(
+            path: 'send',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SendPage();
+            },
+          ),
+          GoRoute(
+            path: 'settings',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SettingsPage();
+            },
+          ),
+          GoRoute(
+            path: 'info',
+            builder: (BuildContext context, GoRouterState state) {
+              return const InfoPage();
+            },
+          ),
+        ],
+      ),
+    ],
+  );
 }

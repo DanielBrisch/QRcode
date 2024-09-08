@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qrcode/routes/routes.dart';
 import 'package:qrcode/stores/login/login_selection_store.dart';
 import 'package:qrcode/utils/color_utils.dart';
 import 'package:qrcode/views/loading_page.dart';
@@ -21,6 +21,12 @@ class _LoginSelectionPageState extends State<LoginSelectionPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: ColorUtils().purple,
+      ),
+    );
 
     return Scaffold(
       body: ScopedBuilder<LoginSelectionStore, LoginSelectionState>(
@@ -110,44 +116,38 @@ class _LoginSelectionPageState extends State<LoginSelectionPage> {
                               Column(
                                 children: [
                                   Text(
-                                    'Bem vindo ao QR Store',
+                                    'Welcome to QR Store',
                                     style: GoogleFonts.roboto(
                                       fontSize: screenSize.aspectRatio * 45,
                                       fontWeight: FontWeight.w700,
-                                      color: ColorUtils().gray,
+                                      color: ColorUtils().grey,
                                     ),
                                   ),
                                   Text(
-                                    'Crie e leia QR codes de forma rapida e facil',
+                                    'Create and read QR codes quickly and easily',
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.roboto(
                                       fontSize: screenSize.aspectRatio * 25,
                                       fontWeight: FontWeight.w700,
-                                      color: ColorUtils().gray,
+                                      color: ColorUtils().grey,
                                     ),
                                   ),
                                 ],
                               ),
                               LoginButton(
                                 buttonColor: ColorUtils().purple,
-                                label: 'Entrar',
+                                label: 'Sing In',
                                 colorLabel: ColorUtils().white,
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.singIn,
-                                  );
+                                  context.go('/singIn');
                                 },
                               ),
                               LoginButton(
                                 buttonColor: ColorUtils().white,
-                                label: 'Cadastrar',
+                                label: 'Sing up',
                                 colorLabel: ColorUtils().purple,
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.singIn,
-                                  );
+                                  context.go('/singIn');
                                 },
                                 borderSide: BorderSide(
                                   color: ColorUtils().purple,
@@ -170,11 +170,11 @@ class _LoginSelectionPageState extends State<LoginSelectionPage> {
                                     ),
                                   ),
                                   Text(
-                                    'Ou entre usando',
+                                    'Or connect using',
                                     style: GoogleFonts.roboto(
                                       fontSize: screenSize.aspectRatio * 30,
                                       fontWeight: FontWeight.w700,
-                                      color: ColorUtils().gray,
+                                      color: ColorUtils().grey,
                                     ),
                                   ),
                                   Expanded(
